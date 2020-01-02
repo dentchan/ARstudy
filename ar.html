@@ -200,7 +200,7 @@
 	//scene.add(ambientLight)
 	//建立點光源
 	pointLight = new THREE.PointLight(0xffffff, 1, 100)
-	pointLight.position.set(0, 40, 40)
+	pointLight.position.set(0, 10, 0)
 	pointLight.castShadow = true // 投影
 	scene.add(pointLight)
 	//////////////////////////////////////////////////////////////////////////////////
@@ -223,6 +223,6 @@
 		onRenderFcts.forEach(function(onRenderFct){
 			onRenderFct(deltaMsec/1000, nowMsec/1000)
 		})
-		pointLight.rotation.y += 0.03
+		//pointLight.rotation.y += 0.03
 	})
 </script></body>
