@@ -34,7 +34,7 @@
 	var camera = new THREE.Camera();
 	scene.add(camera);
 	////////////////////////////////////////////////////////////////////////////////
-	//          handle arToolkitSource
+	//		  handle arToolkitSource
 	////////////////////////////////////////////////////////////////////////////////
 	var arToolkitSource = new THREEx.ArToolkitSource({
 		// to read from the webcam
@@ -61,7 +61,7 @@
 		}
 	}
 	////////////////////////////////////////////////////////////////////////////////
-	//          initialize arToolkitContext
+	//		  initialize arToolkitContext
 	////////////////////////////////////////////////////////////////////////////////
 	// create atToolkitContext
 	var arToolkitContext = new THREEx.ArToolkitContext({
@@ -81,7 +81,7 @@
 		scene.visible = camera.visible
 	})
 	////////////////////////////////////////////////////////////////////////////////
-	//          Create a ArMarkerControls
+	//		  Create a ArMarkerControls
 	////////////////////////////////////////////////////////////////////////////////
 	// init controls for camera
 	var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
@@ -233,6 +233,13 @@
 		onRenderFcts.forEach(function(onRenderFct){
 			onRenderFct(deltaMsec/1000, nowMsec/1000)
 		})
-		pointLight.rotation.y += 0.03
+		draw()
 	})
+
+	function draw() {
+		var x = Math.cos(10 * (Math.PI / 180)) * r
+		var z = Math.sin(10 * (Math.PI / 180)) * r
+		pointLight.position.x += r + x
+		pointLight.position.z += r - x
+	}
 </script></body>
