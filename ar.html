@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 <!-- three.js library -->
 <script src='vendor/three.js/build/three.min.js'></script>
 <!-- ar.js -->
@@ -96,26 +96,6 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	//		add an object in the scene
 	//////////////////////////////////////////////////////////////////////////////////
-
-	// add a torus knot
-	// var geometry	= new THREE.CubeGeometry(1,1,1);
-	// var material	= new THREE.MeshNormalMaterial({
-	// 	transparent : true,
-	// 	opacity: 0.5,
-	// 	side: THREE.DoubleSide
-	// });
-	// var mesh	= new THREE.Mesh( geometry, material );
-	// mesh.position.y	= geometry.parameters.height/2
-	// scene.add( mesh );
-	// var geometry	= new THREE.TorusKnotGeometry(0.3,0.1,64,16);
-	// var material	= new THREE.MeshNormalMaterial();
-	// var mesh	= new THREE.Mesh( geometry, material );
-	// mesh.position.y	= 0.5
-	// scene.add( mesh );
-	// onRenderFcts.push(function(delta){
-	// 	mesh.rotation.x += Math.PI*delta
-	// })
-
 	class Creeper {
 		constructor() {
 			// 宣告頭、身體、腳幾何體大小
@@ -196,8 +176,8 @@
 	creeperObj.creeper.scale.set(0.1,0.1,0.1);
 	scene.add(creeperObj.creeper)
 	// 設置環境光提供輔助柔和白光
-	ambientLight = new THREE.AmbientLight()
-	scene.add(ambientLight)
+	//ambientLight = new THREE.AmbientLight()
+	//scene.add(ambientLight)
 	//建立點光源
 	pointLight = new THREE.PointLight(0xffffff, 1, 100)
 	pointLight.position.set(0, 40, 40)
@@ -234,6 +214,6 @@
 		onRenderFcts.forEach(function(onRenderFct){
 			onRenderFct(deltaMsec/1000, nowMsec/1000)
 		})
-		track.rotation.y += 0.03
+		//track.rotation.y += 0.03
 	})
 </script></body>
