@@ -192,17 +192,19 @@
 			})
 		}
 	}
+	track = new THREE.Group()
 	creeperObj = new Creeper()
 	creeperObj.creeper.scale.set(0.1,0.1,0.1);
-	scene.add(creeperObj.creeper)
 	// 設置環境光提供輔助柔和白光
 	//ambientLight = new THREE.AmbientLight(0x707070)
 	//scene.add(ambientLight)
 	//建立點光源
 	pointLight = new THREE.PointLight(0xffffff, 1, 100)
-	pointLight.position.set(0, 10, 30)
+	pointLight.position.set(0, 40, 40)
 	pointLight.castShadow = true // 投影
-	scene.add(pointLight)
+	track.add(pointLight)
+	track.add(creeperObj.creeper)
+	scene.add(track)
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the whole thing on the page
 	//////////////////////////////////////////////////////////////////////////////////
