@@ -7,7 +7,7 @@
 <script>THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/'</script>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'><div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
-	V1.1
+	V1.2
 </div><script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -199,10 +199,14 @@
 	ambientLight = new THREE.AmbientLight()
 	scene.add(ambientLight)
 	//建立點光源
-	pointLight = new THREE.PointLight(0xffffff, 1, 100)
-	pointLight.position.set(0, 20, 20)
-	pointLight.castShadow = true // 投影
-	scene.add(pointLight)
+	pointLight1 = new THREE.PointLight(0xffffff, 1, 100)
+	pointLight1.position.set(20, 20, 20)
+	pointLight1.castShadow = true // 投影
+	scene.add(pointLight1)
+	pointLight2 = new THREE.PointLight(0xffffff, 1, 100)
+	pointLight2.position.set(20, 0, 20)
+	pointLight2.castShadow = true // 投影
+	scene.add(pointLight2)
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the whole thing on the page
 	//////////////////////////////////////////////////////////////////////////////////
