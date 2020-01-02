@@ -192,9 +192,9 @@
 			})
 		}
 	}
-	track = new THREE.Group()
 	creeperObj = new Creeper()
 	creeperObj.creeper.scale.set(0.1,0.1,0.1);
+	scene.add(creeperObj.creeper)
 	// 設置環境光提供輔助柔和白光
 	//ambientLight = new THREE.AmbientLight(0x707070)
 	//scene.add(ambientLight)
@@ -202,8 +202,16 @@
 	pointLight = new THREE.PointLight(0xffffff, 1, 100)
 	pointLight.position.set(0, 40, 40)
 	pointLight.castShadow = true // 投影
+	track = new THREE.Group()
 	track.add(pointLight)
-	track.add(creeperObj.creeper)
+	//建立旋轉中心
+	geometry = new THREE.BoxGeometry(0, 0, 0) // 幾何體
+	material = new THREE.MeshPhongMaterial({ 
+		color: 0x0000ff 
+	}) // 材質
+	cube = new THREE.Mesh(geometry, material) // 建立網格物件
+	cube.position.set(0, 2, 0)
+	track.add(cube)
 	scene.add(track)
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the whole thing on the page
