@@ -180,8 +180,8 @@
 	//ambientLight = new THREE.AmbientLight()
 	//scene.add(ambientLight)
 	//建立點光源
-	pointLight = new THREE.PointLight(0xffffff, 1, 100)
-	pointLight.position.set(0, 20, 10)
+	pointLight = new THREE.PointLight(0xffffff, 10, 100, 2) //(顏色:整數，強度:浮點，距離:整數，衰減:浮點)
+	pointLight.position.set(0, 40, 10)
 	pointLight.castShadow = true // 投影
 	track = new THREE.Group()
 	track.add(pointLight)
