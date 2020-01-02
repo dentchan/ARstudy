@@ -7,7 +7,7 @@
 <script>THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/'</script>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'><div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
-	2.2
+	V1.3
 </div><script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -155,21 +155,21 @@
 
 			// 頭
 			this.head = new THREE.Mesh(headGeo, headMaterials)
-			this.head.position.set(0, 6, 0)
+			this.head.position.set(0, 12, 0)
 
 			// 身體
 			this.body = new THREE.Mesh(bodyGeo, skinMat)
-			this.body.position.set(0, 0, 0)
+			this.body.position.set(0, 6, 0)
 
 			// 四隻腳
 			this.foot1 = new THREE.Mesh(footGeo, skinMat)
-			this.foot1.position.set(-1, -5.5, 2)
+			this.foot1.position.set(-1, 0.5, 2)
 			this.foot2 = this.foot1.clone() // 剩下三隻腳都複製第一隻的 Mesh
-			this.foot2.position.set(-1, -5.5, -2)
+			this.foot2.position.set(-1, 0.5, -2)
 			this.foot3 = this.foot1.clone()
-			this.foot3.position.set(1, -5.5, 2)
+			this.foot3.position.set(1, 0.5, 2)
 			this.foot4 = this.foot1.clone()
-			this.foot4.position.set(1, -5.5, -2)
+			this.foot4.position.set(1, 0.5, -2)
 
 			// 將四隻腳組合為一個 group
 			this.feet = new THREE.Group()
