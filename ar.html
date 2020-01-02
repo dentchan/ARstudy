@@ -18,7 +18,7 @@
 		alpha: true
 	});
 	renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-	renderer.setSize( 640, 480 );
+	renderer.setSize( window.innerWidth, window.innerHeight );
 	renderer.domElement.style.position = 'absolute'
 	renderer.domElement.style.top = '0px'
 	renderer.domElement.style.left = '0px'
@@ -180,7 +180,7 @@
 	//scene.add(ambientLight)
 	//建立點光源
 	pointLight = new THREE.PointLight(0xffffff, 1, 100)
-	pointLight.position.set(0, 20, 2)
+	pointLight.position.set(0, 20, 10)
 	pointLight.castShadow = true // 投影
 	track = new THREE.Group()
 	track.add(pointLight)
@@ -204,12 +204,6 @@
 	// run the rendering loop
 	var lastTimeMsec= null
 	requestAnimationFrame(function animate(nowMsec){
-		//RWD
-		window.addEventListener('resize', function() {
-			camera.aspect = window.innerWidth / window.innerHeight
-			camera.updateProjectionMatrix()
-			renderer.setSize(window.innerWidth, window.innerHeight)
-		})
 		// keep looping
 		requestAnimationFrame( animate );
 		// measure time
