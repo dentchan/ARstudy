@@ -7,7 +7,7 @@
 <script>THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/'</script>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'><div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
-	2
+	2.1
 </div><script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -195,6 +195,9 @@
 	creeperObj = new Creeper()
 	creeperObj.creeper.scale.set(0.5,0.5,0.5);
 	scene.add(creeperObj.creeper)
+	// 設置環境光提供輔助柔和白光
+	ambientLight = new THREE.AmbientLight(0x707070)
+	scene.add(ambientLight)
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the whole thing on the page
 	//////////////////////////////////////////////////////////////////////////////////
