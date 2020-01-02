@@ -7,7 +7,7 @@
 <script>THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/'</script>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'><div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
-	V1.3
+	V1.0
 </div><script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -198,6 +198,20 @@
 	// 設置環境光提供輔助柔和白光
 	ambientLight = new THREE.AmbientLight(0x707070)
 	scene.add(ambientLight)
+	// 簡單的地板
+	const planeGeometry = new THREE.PlaneGeometry(60, 60)
+	const planeMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff })
+	let plane = new THREE.Mesh(planeGeometry, planeMaterial)
+	plane.rotation.x = -0.5 * Math.PI
+	plane.position.set(0, 0, 0)
+	plane.receiveShadow = true
+	scene.add(plane)
+	//建立點光源
+	pointLight = new THREE.PointLight(0xffffff, 1, 100)
+	pointLight.position.set(0, 40, 40)
+	pointLight.castShadow = true // 投影
+	track = new THREE.Group()
+	track.add(pointLight)
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the whole thing on the page
 	//////////////////////////////////////////////////////////////////////////////////
