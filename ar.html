@@ -7,7 +7,7 @@
 <script>THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/'</script>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'><div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
-	1
+	2
 </div><script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -33,7 +33,6 @@
 	// Create a camera
 	var camera = new THREE.Camera();
 	scene.add(camera);
-	camera.position.set(25, 65, 25)
 	////////////////////////////////////////////////////////////////////////////////
 	//          handle arToolkitSource
 	////////////////////////////////////////////////////////////////////////////////
@@ -194,6 +193,7 @@
 		}
 	}
 	creeperObj = new Creeper()
+	creeperObj.creeper.scale.set(0.5,0.5,0.5);
 	scene.add(creeperObj.creeper)
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the whole thing on the page
