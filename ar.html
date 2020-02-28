@@ -179,22 +179,22 @@
 	// 設置環境光提供輔助柔和白光
 	//ambientLight = new THREE.AmbientLight()
 	//scene.add(ambientLight)
-	//建立點光源
-	pointLight = new THREE.PointLight(0xffffff, 10, 100, 2) //(顏色:整數，強度:浮點，距離:整數，衰減:浮點)
-	pointLight.position.set(0, 40, 10)
-	pointLight.castShadow = true // 投影
-	track = new THREE.Group()
-	track.add(pointLight)
-	//建立旋轉中心
-	geometry = new THREE.BoxGeometry(1, 1, 1) // 幾何體
-	material = new THREE.MeshStandardMaterial({ 
-		transparent: true,
-		opacity: 0, // 透明度
-	}) // 材質
-	cube = new THREE.Mesh(geometry, material) // 建立網格物件
-	cube.position.set(0, 2, 0)
-	track.add(cube)
-	scene.add(track)
+// 	//建立點光源
+// 	pointLight = new THREE.PointLight(0xffffff, 10, 100, 2) //(顏色:整數，強度:浮點，距離:整數，衰減:浮點)
+// 	pointLight.position.set(0, 40, 10)
+// 	pointLight.castShadow = true // 投影
+// 	track = new THREE.Group()
+// 	track.add(pointLight)
+// 	//建立旋轉中心
+// 	geometry = new THREE.BoxGeometry(1, 1, 1) // 幾何體
+// 	material = new THREE.MeshStandardMaterial({ 
+// 		transparent: true,
+// 		opacity: 0, // 透明度
+// 	}) // 材質
+// 	cube = new THREE.Mesh(geometry, material) // 建立網格物件
+// 	cube.position.set(0, 2, 0)
+// 	track.add(cube)
+// 	scene.add(track)
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the whole thing on the page
 	//////////////////////////////////////////////////////////////////////////////////
