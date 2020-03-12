@@ -10,9 +10,6 @@
 	canvas { width: 100%; height: 100% }
 </style>
 <body>
-smoothCount: 5,
-		smoothTolerance: 0.02,
-		smoothThreshold: 4
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -183,7 +180,7 @@ smoothCount: 5,
 	creeperObj.creeper.scale.set(0.1,0.1,0.1);
 	scene.add(creeperObj.creeper)
 	// 設置環境光提供輔助柔和白光
-	ambientLight = new THREE.AmbientLight(0xff00ff)
+	ambientLight = new THREE.AmbientLight()
 	scene.add(ambientLight)
 // 	//建立點光源
 // 	pointLight = new THREE.PointLight(0xffffff, 10, 100, 2) //(顏色:整數，強度:浮點，距離:整數，衰減:浮點)
