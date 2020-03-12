@@ -10,6 +10,7 @@
 	canvas { width: 100%; height: 100% }
 </style>
 <body>
+smoothCount: 2, smoothTolerance: 0.03, smoothThreshold: 4
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -92,7 +93,8 @@
 		// as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
 		changeMatrixMode: 'cameraTransformMatrix',
 		smoothCount: 3,
-		smoothTolerance: 0.02
+		smoothTolerance: 0.02,
+		smoothThreshold: 2
 	})
 	// as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
 	scene.visible = false
