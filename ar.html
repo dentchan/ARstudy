@@ -115,12 +115,6 @@
 	// render the scene
 	onRenderFcts.push(function(){
 		renderer.render( scene, camera );
-		var video = arToolkitSource.domElement;
-		var canvas = document.getElementById('canvas')
-		canvas.height = video.videoHeight;
-    	canvas.width = video.videoWidth;
-    	var ctx = canvas.getContext('2d');
-    	ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 	})
 	// run the rendering loop
 	var lastTimeMsec= null
@@ -136,4 +130,10 @@
 			onRenderFct(deltaMsec/1000, nowMsec/1000)
 		})
 	})
+	var video = arToolkitSource.domElement;
+	var canvas = document.getElementById('canvas')
+	canvas.height = video.videoHeight;
+	canvas.width = video.videoWidth;
+	var ctx = canvas.getContext('2d');
+	ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 </script></body>
