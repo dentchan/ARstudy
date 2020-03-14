@@ -8,9 +8,10 @@
 <script>THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/'</script>
 <style>
 	body { margin: 0; }
+	canvas {margin-top:50px;}
 </style>
 <body>
-	<canvas id='canvas'></canvas>
+	<canvas id='canvas' ></canvas>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -131,8 +132,7 @@
 		})
 	})
 	var video = arToolkitSource.domElement;
-	var canvas = document.createElement('canvas');
-	document.body.appendChild(canvas)
+	var canvas = document.getElementById('canvas')
 	canvas.height = video.videoHeight;
 	canvas.width = video.videoWidth;
 	var ctx = canvas.getContext('2d');
