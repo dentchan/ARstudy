@@ -114,18 +114,16 @@
 	//		render the whole thing on the page
 	//////////////////////////////////////////////////////////////////////////////////
 	// render the scene
-	var b = false
+
+	var video = arToolkitSource.domElement;
+	var canvas = document.getElementById('canvas')
+	var image;
+	canvas.height = video.videoHeight;
+	canvas.width = video.videoWidth;
 	onRenderFcts.push(function(){
 		renderer.render( scene, camera );
-		if(!b){
-			var video = arToolkitSource.domElement;
-			var canvas = document.getElementById('canvas')
-			canvas.height = video.videoHeight;
-			canvas.width = video.videoWidth;
-			var ctx = canvas.getContext('2d');
-			ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-			b = !b
-		}
+		var ctx = canvas.getContext('2d');
+		ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 	})
 	// run the rendering loop
 	var lastTimeMsec= null
