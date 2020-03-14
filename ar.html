@@ -52,16 +52,16 @@
 	// 	onResize()
 	// })
 	// handle resize
-	window.addEventListener('resize', function(){
-		onResize()
-	})
-	function onResize(){
-		arToolkitSource.onResizeElement()
-		arToolkitSource.copyElementSizeTo(renderer.domElement)
-		if( arToolkitContext.arController !== null ){
-			arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)
-		}
-	}
+	// window.addEventListener('resize', function(){
+	// 	onResize()
+	// })
+	// function onResize(){
+	// 	arToolkitSource.onResizeElement()
+	// 	arToolkitSource.copyElementSizeTo(renderer.domElement)
+	// 	if( arToolkitContext.arController !== null ){
+	// 		arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)
+	// 	}
+	// }
 	////////////////////////////////////////////////////////////////////////////////
 	//          initialize arToolkitContext
 	////////////////////////////////////////////////////////////////////////////////
