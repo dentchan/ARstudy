@@ -127,6 +127,7 @@
 		if(!getit){
 			ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 			image = canvas.toDataURL();
+			getit = true;
 		}
 		else{
 			ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
