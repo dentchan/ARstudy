@@ -40,7 +40,7 @@
 	////////////////////////////////////////////////////////////////////////////////
 	var arToolkitSource = new THREEx.ArToolkitSource({
 		// to read from the webcam
-		// sourceType : 'webcam',
+		sourceType : 'webcam',
 		// to read from an image
 		// sourceType : 'image',
 		// sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg',
@@ -48,20 +48,20 @@
 		// sourceType : 'video',
 		// sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',
 	})
-	// arToolkitSource.init(function onReady(){
-	// 	onResize()
-	// })
+	arToolkitSource.init(function onReady(){
+		onResize()
+	})
 	// handle resize
-	// window.addEventListener('resize', function(){
-	// 	onResize()
-	// })
-	// function onResize(){
-	// 	arToolkitSource.onResizeElement()
-	// 	arToolkitSource.copyElementSizeTo(renderer.domElement)
-	// 	if( arToolkitContext.arController !== null ){
-	// 		arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)
-	// 	}
-	// }
+	window.addEventListener('resize', function(){
+		onResize()
+	})
+	function onResize(){
+		arToolkitSource.onResizeElement()
+		arToolkitSource.copyElementSizeTo(renderer.domElement)
+		if( arToolkitContext.arController !== null ){
+			arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)
+		}
+	}
 	////////////////////////////////////////////////////////////////////////////////
 	//          initialize arToolkitContext
 	////////////////////////////////////////////////////////////////////////////////
