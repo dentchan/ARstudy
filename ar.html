@@ -131,7 +131,8 @@
 		})
 	})
 	var video = arToolkitSource.domElement;
-	var canvas = document.getElementById('canvas')
+	var canvas = document.createElement('canvas');
+	document.body.appendChild(canvas)
 	canvas.height = video.videoHeight;
 	canvas.width = video.videoWidth;
 	var ctx = canvas.getContext('2d');
