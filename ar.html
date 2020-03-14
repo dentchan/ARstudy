@@ -114,7 +114,7 @@
 	//		render the whole thing on the page
 	//////////////////////////////////////////////////////////////////////////////////
 	// render the scene
-	var image;
+	var image = new Image;
 	var getit = false;
 	onRenderFcts.push(function(){
 		renderer.render( scene, camera );
@@ -126,7 +126,7 @@
 		var ctx = canvas.getContext('2d');
 		if(!getit){
 			ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-			image = canvas.toDataURL();
+			image.src = canvas.toDataURL();
 			getit = true;
 		}
 		else{
