@@ -40,10 +40,10 @@
 	////////////////////////////////////////////////////////////////////////////////
 	var arToolkitSource = new THREEx.ArToolkitSource({
 		// to read from the webcam
-		sourceType : 'webcam',
-		// // to read from an image
-		// sourceType : 'image',
-		// sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg',
+		// sourceType : 'webcam',
+		// to read from an image
+		sourceType : 'image',
+		sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg',
 		// to read from a video
 		// sourceType : 'video',
 		// sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',
@@ -77,7 +77,7 @@
 	})
 	// update artoolkit on every frame
 	onRenderFcts.push(function(){
-		if( arToolkitSource.ready === false )	return
+		if( arToolkitSource.ready === false ) return
 		arToolkitContext.update( arToolkitSource.domElement )
 		// update scene.visible if the marker is seen
 		scene.visible = camera.visible
