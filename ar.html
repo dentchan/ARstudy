@@ -4,6 +4,7 @@
 <script src='vendor/three.js/build/three.min.js'></script>
 <!-- ar.js -->
 <script src="build/ar.js"></script>
+<script src="creeper.js"></script>
 <script>THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/'</script>
 <style>
 	body { margin: 0; }
@@ -40,9 +41,9 @@
 	var arToolkitSource = new THREEx.ArToolkitSource({
 		// to read from the webcam
 		sourceType : 'webcam',
-		// to read from an image
+		// // to read from an image
 		// sourceType : 'image',
-		// sourceUrl : 'image.jpg',
+		// sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg',
 		// to read from a video
 		// sourceType : 'video',
 		// sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',
@@ -90,114 +91,25 @@
 		patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.hiro',
 		// patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.kanji',
 		// as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
-		changeMatrixMode: 'cameraTransformMatrix',
-		smoothCount: 5,
-		smoothTolerance: 0.03,
-		smoothThreshold: 3
+		changeMatrixMode: 'cameraTransformMatrix'
 	})
 	// as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
 	scene.visible = false
 	//////////////////////////////////////////////////////////////////////////////////
 	//		add an object in the scene
 	//////////////////////////////////////////////////////////////////////////////////
-	class Creeper {
-		constructor() {
-			// 宣告頭、身體、腳幾何體大小
-			const headGeo = new THREE.BoxGeometry(4, 4, 4)
-			const bodyGeo = new THREE.BoxGeometry(4, 8, 2)
-			const footGeo = new THREE.BoxGeometry(2, 3, 2)
-
-			// 苦力怕臉部貼圖
-			const headMap = new THREE.TextureLoader().load(
-				'https://dl.dropboxusercontent.com/s/bkqu0tty04epc46/creeper_face.png'
-			)
-			// 苦力怕皮膚貼圖
-			const skinMap = new THREE.TextureLoader().load(
-				'https://dl.dropboxusercontent.com/s/eev6wxdxfmukkt8/creeper_skin.png'
-			)
-
-			// 身體與腳的材質設定
-			const skinMat = new THREE.MeshStandardMaterial({
-				//roughness: 0.3, // 粗糙度
-				//metalness: 0.8, // 金屬感
-				//transparent: false, // 透明與否
-				//opacity: 0.9, // 透明度
-				side: THREE.DoubleSide, // 雙面材質
-				map: skinMap // 皮膚貼圖
-			})
-
-			// 準備頭部與臉的材質
-			const headMaterials = []
-			for (let i = 0; i < 6; i++) {
-				let map
-
-				if (i === 4) map = headMap
-				else map = skinMap
-
-				headMaterials.push(new THREE.MeshStandardMaterial({ map: map }))
-			}
-
-			// 頭
-			this.head = new THREE.Mesh(headGeo, headMaterials)
-			this.head.position.set(0, 12, 0)
-
-			// 身體
-			this.body = new THREE.Mesh(bodyGeo, skinMat)
-			this.body.position.set(0, 6, 0)
-
-			// 四隻腳
-			this.foot1 = new THREE.Mesh(footGeo, skinMat)
-			this.foot1.position.set(-1, 0.5, 2)
-			this.foot2 = this.foot1.clone() // 剩下三隻腳都複製第一隻的 Mesh
-			this.foot2.position.set(-1, 0.5, -2)
-			this.foot3 = this.foot1.clone()
-			this.foot3.position.set(1, 0.5, 2)
-			this.foot4 = this.foot1.clone()
-			this.foot4.position.set(1, 0.5, -2)
-
-			// 將四隻腳組合為一個 group
-			this.feet = new THREE.Group()
-			this.feet.add(this.foot1)
-			this.feet.add(this.foot2)
-			this.feet.add(this.foot3)
-			this.feet.add(this.foot4)
-
-			// 將頭、身體、腳組合為一個 group
-			this.creeper = new THREE.Group()
-			this.creeper.add(this.head)
-			this.creeper.add(this.body)
-			this.creeper.add(this.feet)
-
-			this.creeper.traverse(function(object) {
-				if (object instanceof THREE.Mesh) {
-					object.castShadow = true
-					object.receiveShadow = true
-				}
-			})
-		}
-	}
 	creeperObj = new Creeper()
 	creeperObj.creeper.scale.set(0.1,0.1,0.1);
 	scene.add(creeperObj.creeper)
 	// 設置環境光提供輔助柔和白光
-	ambientLight = new THREE.AmbientLight()
-	scene.add(ambientLight)
-// 	//建立點光源
-// 	pointLight = new THREE.PointLight(0xffffff, 10, 100, 2) //(顏色:整數，強度:浮點，距離:整數，衰減:浮點)
-// 	pointLight.position.set(0, 40, 10)
-// 	pointLight.castShadow = true // 投影
-// 	track = new THREE.Group()
-// 	track.add(pointLight)
-// 	//建立旋轉中心
-// 	geometry = new THREE.BoxGeometry(1, 1, 1) // 幾何體
-// 	material = new THREE.MeshStandardMaterial({ 
-// 		transparent: true,
-// 		opacity: 0, // 透明度
-// 	}) // 材質
-// 	cube = new THREE.Mesh(geometry, material) // 建立網格物件
-// 	cube.position.set(0, 2, 0)
-// 	track.add(cube)
-// 	scene.add(track)
+	//ambientLight = new THREE.AmbientLight()
+	//scene.add(ambientLight)
+	//建立點光源
+	pointLight = new THREE.PointLight(0xffffff, 10, 100, 2) //(顏色:整數，強度:浮點，距離:整數，衰減:浮點)
+	pointLight.position.set(0, 40, 10)
+	pointLight.castShadow = true // 投影
+	track = new THREE.Group()
+	track.add(pointLight)
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the whole thing on the page
 	//////////////////////////////////////////////////////////////////////////////////
@@ -218,6 +130,5 @@
 		onRenderFcts.forEach(function(onRenderFct){
 			onRenderFct(deltaMsec/1000, nowMsec/1000)
 		})
-		//track.rotation.y += 0.03
 	})
 </script></body>
