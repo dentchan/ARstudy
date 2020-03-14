@@ -76,12 +76,14 @@
 		camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
 	})
 	// update artoolkit on every frame
-	onRenderFcts.push(function(){
-		if( arToolkitSource.ready === false ) return
-		arToolkitContext.update( arToolkitSource.domElement )
-		// update scene.visible if the marker is seen
-		scene.visible = camera.visible
-	})
+	// onRenderFcts.push(function(){
+	// 	if( arToolkitSource.ready === false ) return
+	// 	arToolkitContext.update( arToolkitSource.domElement )
+	// 	// update scene.visible if the marker is seen
+	// 	scene.visible = camera.visible
+	// 	// ---------- my code ----------
+		
+	// })
 	////////////////////////////////////////////////////////////////////////////////
 	//          Create a ArMarkerControls
 	////////////////////////////////////////////////////////////////////////////////
