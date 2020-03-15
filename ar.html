@@ -11,7 +11,6 @@
 	canvas {margin-top:50px;}
 </style>
 <body>
-	<canvas id='canvas' ></canvas>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -118,13 +117,13 @@
 		renderer.render( scene, camera );
 		//-----------------------------------------
 		var video = arToolkitSource.domElement;
-		var canvas = document.getElementById('canvas')
+		var canvas = document.ceateElement('canvas')
 		canvas.height = video.videoHeight;
 		canvas.width = video.videoWidth;
 		var ctx = canvas.getContext('2d');
 		ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-		image.src = canvas.toDataURL();
-		getit = true;
+		var imgData = ctx.getImageData(1, 1, 1, 1);
+		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 	})
 	// run the rendering loop
 	var lastTimeMsec= null
