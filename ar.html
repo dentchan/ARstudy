@@ -11,7 +11,7 @@
 	canvas {margin-top:50px;}
 </style>
 <body>
-	<font id="info" style="margin-top:200px;"></font>
+	<font id="info"></font>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -127,7 +127,7 @@
 		ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 		var imgData = ctx.getImageData(1, 1, 1, 1);
 		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
-		document.getElementById('info').textContent = arToolkitContext.getProjectionMatrix(video);
+		document.getElementById('info').textContent = camera.position +" "+ camera.quaternion;
 	})
 	// run the rendering loop
 	var lastTimeMsec= null
