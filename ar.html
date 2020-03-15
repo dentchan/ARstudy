@@ -11,6 +11,7 @@
 	canvas {margin-top:50px;}
 </style>
 <body>
+	<font id="info" style="margin-top:200px;"></font>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -115,7 +116,9 @@
 	// render the scene
 	onRenderFcts.push(function(){
 		renderer.render( scene, camera );
-		//-----------------------------------------
+	})
+	//my code
+	onRenderFcts.push(function(){
 		var video = arToolkitSource.domElement;
 		var canvas = document.createElement('canvas')
 		canvas.height = video.videoHeight;
@@ -124,6 +127,7 @@
 		ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 		var imgData = ctx.getImageData(1, 1, 1, 1);
 		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
+		document.getElementById('info').textContent = markerControls.getProjectionMatrix(video);
 	})
 	// run the rendering loop
 	var lastTimeMsec= null
