@@ -11,7 +11,6 @@
 	canvas {margin-top:50px;}
 </style>
 <body>
-	<font id="info"></font>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -127,7 +126,7 @@
 		ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 		var imgData = ctx.getImageData(1, 1, 1, 1);
 		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
-		document.getElementById('info').textContent = "\n\n\n\n\n\nX:"+ camera.position.x + "\nY:" + 
+		document.getElementById('info').textContent = "X:"+ camera.position.x + "\nY:" + 
 			camera.position.y + "\nZ:" + camera.position.z + "\nqX:" + camera.quaternion.x + "\nqY:" + camera.quaternion.y + 
 			"\nqZ:" + camera.quaternion.z + "\nsX:" + camera.scale.x + "\nsY:" + camera.scale.y + "\nsZ:" + camera.scale.z 
 		})
@@ -145,4 +144,6 @@
 			onRenderFct(deltaMsec/1000, nowMsec/1000)
 		})
 	})
-</script></body>
+</script>
+<font id="info"></font>
+</body>
