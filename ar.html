@@ -142,7 +142,7 @@
 		vector.x = ( vector.x * widthHalf ) + widthHalf;
 		vector.y = - ( vector.y * heightHalf ) + heightHalf;
 		vector.z = 0;
-		var imgData = ctx.getImageData(vecor.x, vector.y, 1, 1);
+		var imgData = ctx.getImageData(vector.x, vector.y, 1, 1);
 		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y + "r:<br>"+
 			imgData.data[0]+"g:"+imgData.data[1]+"b:"+imgData.data[2];
