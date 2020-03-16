@@ -11,6 +11,7 @@
 	video {margin-top:200px;}
 </style>
 <body>
+	V1___
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -136,7 +137,7 @@
 		projScreenMat.multiply( camera.projectionMatrix, camera.matrix );
 		projScreenMat.multiplyVector3(pos);
 		document.getElementById('info').textContent = "x:" + ((pos.x+1)*video.width/2)+
-			"y:" + ((- pos +1)*video.height/2);
+			"y:" + ((-pos.y +1)*video.height/2);
 		})
 	// run the rendering loop
 	var lastTimeMsec= null
