@@ -136,7 +136,7 @@
 		projScreenMat.multiply( camera.projectionMatrix, camera.matrixWorldInverse );
 		projScreenMat.multiplyVector3(pos);
 		document.getElementById('info').textContent = "x:" + ((pos.x+1)*video.width()/2+video.offset().left)+
-			"y:" + ((-pos +1)video.height()/2+video.offset().top)
+			"y:" + ((- pos +1)video.height()/2+video.offset().top);
 		})
 	// run the rendering loop
 	var lastTimeMsec= null
