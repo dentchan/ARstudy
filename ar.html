@@ -126,7 +126,7 @@
 		var ctx = canvas.getContext('2d');
 		ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 		var imgData = ctx.getImageData(0, 0, 500, 500);
-		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
+// 		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 // 		document.getElementById('info').textContent = "X:"+ camera.position.x.toFixed(3) + "\nY:" + 
 // 			camera.position.y.toFixed(3) + "\nZ:" + camera.position.z.toFixed(3) + "\nqX:" + 
 // 			camera.quaternion.x.toFixed(3) + "\nqY:" + camera.quaternion.y.toFixed(3) + 
@@ -144,6 +144,8 @@
 		vector.x = ( vector.x * widthHalf ) + widthHalf;
 		vector.y = - ( vector.y * heightHalf ) + heightHalf;
 		vector.z = 0;
+		var temp = ((vector.y-1) * 500 + vector.x)*4;
+		pointLight.color = new THREE.Color("rgb("+imgData.data[temp]+", "+imgData.data[temp+1]+", "+imgData.data[temp+2]+")");
 		document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y;
 		})
 	// run the rendering loop
