@@ -146,7 +146,7 @@
 		vector.z = 0;
 		var temp = ((vector.y-1) * 500 + vector.x)*4;
 		pointLight.color = new THREE.Color("rgb("+imgData.data[temp]+", "+imgData.data[temp+1]+", "+imgData.data[temp+2]+")");
-		document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y;
+		document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y + "r:"+imgData.data[temp]+"g:"+imgData.data[temp+1]+"b:"+imgData.data[temp+2];
 		})
 	// run the rendering loop
 	var lastTimeMsec= null
