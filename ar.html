@@ -131,7 +131,7 @@
 // 			camera.quaternion.x.toFixed(3) + "\nqY:" + camera.quaternion.y.toFixed(3) + 
 // 			"\nqZ:" + camera.quaternion.z.toFixed(3) + "\nsX:" + camera.scale.x.toFixed(3) + 
 // 			"\nsY:" + camera.scale.y.toFixed(3) + "\nsZ:" + camera.scale.z.toFixed(3)
-		var pos = camera.position;
+		var pos = new THREE.Vector3( 0, 1, 0 );
 		projScreenMat = new THREE.Matrix4();
 		projScreenMat.multiply( camera.projectionMatrix, camera.matrix );
 		projScreenMat.multiplyVector3(pos);
