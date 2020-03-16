@@ -109,7 +109,7 @@
 	pointLight = new THREE.PointLight(0xffffff, 10, 100, 2) //(顏色:整數，強度:浮點，距離:整數，衰減:浮點)
 	pointLight.position.set(0, 40, 10)
 	pointLight.castShadow = true // 投影
-	scene.add(pointLight)
+	//scene.add(pointLight)
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the whole thing on the page
 	//////////////////////////////////////////////////////////////////////////////////
@@ -140,7 +140,7 @@
 		vector.y = - ( vector.y * heightHalf ) + heightHalf;
 		vector.z = 0;
 		var imgData = ctx.getImageData(vector.x, vector.y-2, 1, 1);
-		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
+		ambientLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y + 
 			"\nr:"+ imgData.data[0]+"g:"+imgData.data[1]+"b:"+imgData.data[2];
 		})
