@@ -11,7 +11,7 @@
 	video {margin-top:200px;}
 </style>
 <body>
-	V___
+	V4___
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -132,12 +132,20 @@
 // 			camera.quaternion.x.toFixed(3) + "\nqY:" + camera.quaternion.y.toFixed(3) + 
 // 			"\nqZ:" + camera.quaternion.z.toFixed(3) + "\nsX:" + camera.scale.x.toFixed(3) + 
 // 			"\nsY:" + camera.scale.y.toFixed(3) + "\nsZ:" + camera.scale.z.toFixed(3)
-		var pos = creeperObj.creeper.position.clone();
-		projScreenMat = new THREE.Matrix4();
-		projScreenMat.multiply( camera.projectionMatrix, camera.matrixWorldInverse );
-		projScreenMat.multiplyVector3(pos);
-		document.getElementById('info').textContent = "x:" + ((pos.x+1)*video.width/2)+
-			"y:" + ((-pos.y +1)*video.height/2);
+		var vector = obj.clone();
+		var windowWidth = window.innerWidth;
+		var minWidth = 1280;
+		if(windowWidth < minWidth) {
+			windowWidth = minWidth;
+		}
+		var widthHalf = (windowWidth/2);
+		var heightHalf = (window.innerHeight/2);
+		vector.project(camera);
+		vector.x = ( vector.x * widthHalf ) + widthHalf;
+		vector.y = - ( vector.y * heightHalf ) + heightHalf;
+		vector.z = 0;
+
+		document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y;
 		})
 	// run the rendering loop
 	var lastTimeMsec= null
