@@ -132,7 +132,7 @@
 // 			camera.quaternion.x.toFixed(3) + "\nqY:" + camera.quaternion.y.toFixed(3) + 
 // 			"\nqZ:" + camera.quaternion.z.toFixed(3) + "\nsX:" + camera.scale.x.toFixed(3) + 
 // 			"\nsY:" + camera.scale.y.toFixed(3) + "\nsZ:" + camera.scale.z.toFixed(3)
-		var pos = creeperObj.creeper.position;
+		var pos = creeperObj.creeper.position.clone();
 		projScreenMat = new THREE.Matrix4();
 		projScreenMat.multiply( camera.projectionMatrix, camera.matrix );
 		projScreenMat.multiplyVector3(pos);
