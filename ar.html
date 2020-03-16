@@ -131,11 +131,8 @@
 // 			"\nqZ:" + camera.quaternion.z.toFixed(3) + "\nsX:" + camera.scale.x.toFixed(3) + 
 // 			"\nsY:" + camera.scale.y.toFixed(3) + "\nsZ:" + camera.scale.z.toFixed(3)
 		var vector = creeperObj.creeper.position.clone();
+		vector.x-=2;
 		var windowWidth = window.innerWidth;
-// 		var minWidth = 1280;
-// 		if(windowWidth < minWidth) {
-// 			windowWidth = minWidth;
-// 		}
 		var widthHalf = (windowWidth/2);
 		var heightHalf = (window.innerHeight/2);
 		vector.project(camera);
