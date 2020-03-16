@@ -11,7 +11,7 @@
 	video {margin-top:200px;}
 </style>
 <body>
-	V3___
+	V5___
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -21,7 +21,7 @@
 		antialias: true,
 		alpha: true
 	});
-	renderer.setSize(window.Width, window.Height);
+	renderer.setSize(window.innerWidth, window.innerHeight);
 	renderer.domElement.style.position = 'absolute';
 	renderer.domElement.style.top = '200px';
 	renderer.domElement.style.left = '0px';
@@ -125,7 +125,7 @@
 		canvas.width = video.videoWidth;
 		var ctx = canvas.getContext('2d');
 		ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-		var imgData = ctx.getImageData(0, 0, window.innerWidth, window.innerHeight);
+		var imgData = ctx.getImageData(0, 0, 500, 500);
 		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 // 		document.getElementById('info').textContent = "X:"+ camera.position.x.toFixed(3) + "\nY:" + 
 // 			camera.position.y.toFixed(3) + "\nZ:" + camera.position.z.toFixed(3) + "\nqX:" + 
