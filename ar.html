@@ -144,7 +144,6 @@
 		vector.x = ( vector.x * widthHalf ) + widthHalf;
 		vector.y = - ( vector.y * heightHalf ) + heightHalf;
 		vector.z = 0;
-		var t = (vector.y * (window.innerWidth) -1 + vector.x)*4
 		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y;
 		})
