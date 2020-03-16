@@ -11,7 +11,7 @@
 	video {margin-top:200px;}
 </style>
 <body>
-	V2___
+	V___
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -134,7 +134,7 @@
 // 			"\nsY:" + camera.scale.y.toFixed(3) + "\nsZ:" + camera.scale.z.toFixed(3)
 		var pos = creeperObj.creeper.position.clone();
 		projScreenMat = new THREE.Matrix4();
-		projScreenMat.multiply( camera.projectionMatrix, camera.matrix );
+		projScreenMat.multiply( camera.projectionMatrix, camera.matrixWorldInverse );
 		projScreenMat.multiplyVector3(pos);
 		document.getElementById('info').textContent = "x:" + ((pos.x+1)*video.width/2)+
 			"y:" + ((-pos.y +1)*video.height/2);
