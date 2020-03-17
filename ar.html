@@ -10,7 +10,7 @@
 	body { margin: 0; }
 </style>
 <body>
-	V0
+	V1
 	<font id='info'></font>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
@@ -124,11 +124,12 @@
 	//		add subscreen
 	//////////////////////////////////////////////////////////////////////////////////
 	var canvas = document.createElement('canvas');
+	document.body.appendChild(canvas);
 	canvas.style.position = 'absolute';
 	canvas.style.Top = '200px';
+	canvas.style.left = '0px';
 	canvas.height = 50;
 	canvas.width = 50;
-	document.body.appendChild(canvas);
 	//////////////////////////////////////////////////////////////////////////////////
 	//		change the light color
 	//////////////////////////////////////////////////////////////////////////////////
@@ -136,9 +137,9 @@
 		var ctx = canvas.getContext('2d');
 		var vector = creeperObj.creeper.position.clone();
 		vector.project(camera);
-		vector.x = Math.round((vector.x + 1)*canvas.width/2);
-		vector.y = Math.round((-vector.y+1)*canvas.height/2);
-		ctx.drawImage(video, vector.x, vector.y, 50, 50,0,0,50,50);
+		vector.x = Math.round((vector.x + 1)*video.videoWidth/2);
+		vector.y = Math.round((-vector.y + 1)*video.videoHeight/2);
+		ctx.drawImage(video, vector.x, vector.y, 10, 10,0,0,50,50);
 		var imgData = ctx.getImageData(0, 0, 1, 1);
 		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		document.getElementById('info').innerText = " rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")"
