@@ -74,7 +74,6 @@
 	}
 	var video = arToolkitSource.domElement;
 	video.style.marginTop = marginTop+'px';
-	canvas.style.marginTop = (marginTop+video.videoHeight)+'px';
 	////////////////////////////////////////////////////////////////////////////////
 	//		  initialize arToolkitContext
 	////////////////////////////////////////////////////////////////////////////////
@@ -94,6 +93,7 @@
 		arToolkitContext.update( arToolkitSource.domElement )
 		// update scene.visible if the marker is seen
 		scene.visible = camera.visible
+		canvas.style.marginTop = (marginTop+video.videoHeight)+'px';
 	})
 	////////////////////////////////////////////////////////////////////////////////
 	//		  Create a ArMarkerControls
