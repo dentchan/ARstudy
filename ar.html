@@ -10,7 +10,7 @@
 	body { margin: 0; }
 </style>
 <body>
-	V半成品___
+	V___
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -22,7 +22,7 @@
 	});
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	renderer.domElement.style.position = 'absolute';
-	renderer.domElement.style.top = '150px';
+	renderer.domElement.style.top = '0px';
 	renderer.domElement.style.left = '0px';
 	document.body.appendChild( renderer.domElement );
 	// array of functions for the rendering loop
@@ -120,25 +120,27 @@
 	//my code
 	onRenderFcts.push(function(){
 		var video = arToolkitSource.domElement;
-		video.style.marginTop = '150px';
+		video.style.marginTop = '0px';
 		var canvas = document.createElement('canvas');
+		canvas.style..marginTop = '200px';
 		canvas.height = video.videoHeight;
 		canvas.width = video.videoWidth;
+		document.body.appendChild( canvas );
 		var ctx = canvas.getContext('2d');
-		ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 		var vector = creeperObj.creeper.position.clone();
-		vector.x-=0.05;
+		//vector.x-=0.05;
 		var windowWidth = window.innerWidth;
 		var widthHalf = (windowWidth/2);
 		var heightHalf = (window.innerHeight/2);
 		vector.project(camera);
 		vector.x = ( vector.x * widthHalf ) + widthHalf;
 		vector.y = - ( vector.y * heightHalf ) + heightHalf;
-		var imgData = ctx.getImageData(vector.x, vector.y-2, 1, 1);
-		ambientLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
-		document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y + 
-			"\nr:"+ imgData.data[0]+"g:"+imgData.data[1]+"b:"+imgData.data[2];
-		})
+		ctx.drawImage(video, vector.x-50, vector.y-50, 100, 100);
+		//var imgData = ctx.getImageData(vector.x-50, vector.y-50, 100, 100);
+		//ambientLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
+		//document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y + 
+		//	"\nr:"+ imgData.data[0]+"g:"+imgData.data[1]+"b:"+imgData.data[2];
+		//})
 	// run the rendering loop
 	var lastTimeMsec= null
 	requestAnimationFrame(function animate(nowMsec){
