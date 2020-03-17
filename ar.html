@@ -10,7 +10,7 @@
 	body { margin: 0; }
 </style>
 <body>
-	V4___
+	V5___
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -134,8 +134,10 @@
 		var widthHalf = (windowWidth/2);
 		var heightHalf = (window.innerHeight/2);
 		vector.project(camera);
-		vector.x = ( vector.x * widthHalf ) + widthHalf - 10;
-		vector.y = - ( vector.y * heightHalf ) + heightHalf - 10;
+		//vector.x = ( vector.x * widthHalf +1) + widthHalf - 10;
+		//vector.y = - ( vector.y * heightHalf ) + heightHalf - 10;
+		vector.x = (vector.x + 1) / 2 * window.innerWidth;
+        	vector.y = -(vector.y - 1) / 2 * window.innerHeight;
 		ctx.drawImage(video, vector.x, vector.y, 50, 50,0,0,100,100);
 		var imgData = ctx.getImageData(0, 0, 1, 1);
 		ambientLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
