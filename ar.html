@@ -126,7 +126,7 @@
 	var canvas = document.createElement('canvas');
 	document.body.appendChild(canvas);
 	canvas.style.position = 'absolute';
-	canvas.style.marginTop = '150px';
+	canvas.style.marginTop = (marginTop50)+'px';
 	canvas.height = 100;
 	canvas.width = 100;
 	//////////////////////////////////////////////////////////////////////////////////
@@ -154,7 +154,7 @@
 		var disX = Math.abs(vectorLT.x - vectorRB.x);
 		var disY = Math.abs(vectorLT.y - vectorRB.y);
 		var sideL = Math.max(disX,disY);
-		ctx.drawImage(video, Math.max(vectorLT.x,vectorRB.x), Math.max(vectorLT.y,vectorRB.y), sideL, sideL,0,0,100,100);
+		ctx.drawImage(video, Math.min(vectorLT.x,vectorRB.x), Math.min(vectorLT.y,vectorRB.y), sideL, sideL,0,0,100,100);
 		var imgData = ctx.getImageData(sideL/2, sideL/2, 1, 1);
 		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		document.getElementById('info').innerText = " "+vectorLT.x+" "+vectorLT.y;
