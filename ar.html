@@ -8,10 +8,9 @@
 <script>THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/'</script>
 <style>
 	body { margin: 0; }
-	video { margin-top: 150px; }
 </style>
 <body>
-	V11___
+	V0___
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -120,6 +119,7 @@
 	//my code
 	onRenderFcts.push(function(){
 		var video = arToolkitSource.domElement;
+		video.style.marginTop = '150px';
 		var canvas = document.createElement('canvas')
 		canvas.height = video.videoHeight;
 		canvas.width = video.videoWidth;
