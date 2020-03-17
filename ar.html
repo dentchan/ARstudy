@@ -10,7 +10,7 @@
 	body { margin: 0; }
 </style>
 <body>
-	<font id='info'>V0</font>
+	<font id='info'>V1</font>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		vars
@@ -109,7 +109,7 @@
 	ambientLight = new THREE.AmbientLight()
 	scene.add(ambientLight)
 	//建立點光源(顏色:整數，強度:浮點，距離:整數，衰減:浮點)
-	pointLight = new THREE.PointLight(0xffffff, 5, 100, 2) 
+	pointLight = new THREE.PointLight(0xffffff, 10, 100, 2) 
 	pointLight.position.set(0, 40, 10)
 	pointLight.castShadow = true // 投影
 	scene.add(pointLight)
@@ -124,7 +124,7 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	var canvas = document.createElement('canvas');
 	canvas.style.position = 'absolute';
-	canvas.style.marginTop = '200px';
+	canvas.style.Top = '200px';
 	canvas.height = video.videoHeight;
 	canvas.width = video.videoWidth;
 	document.body.appendChild(canvas);
@@ -137,9 +137,9 @@
 		vector.project(camera);
 		vector.x = Math.round((vector.x + 1)*canvas.width/2);
 		vector.y = Math.round((-vector.y+1)*canvas.height/2);
-		ctx.drawImage(video, vector.x, vector.y, 10, 10,0,0,10,10);
+		ctx.drawImage(video, vector.x, vector.y, 50, 50,0,0,50,50);
 		var imgData = ctx.getImageData(0, 0, 1, 1);
-		ambientLight.color = pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
+		ambientLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
