@@ -11,7 +11,7 @@
 	video {margin-top:200px;}
 </style>
 <body>
-	V2___
+	V3___
 	<canvas id="canvas"></canvas>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
@@ -23,7 +23,6 @@
 		alpha: true
 	});
 	renderer.setSize(window.innerWidth, window.innerHeight);
-	renderer.domElement.style.position = 'absolute';
 	renderer.domElement.style.top = '200px';
 	renderer.domElement.style.left = '0px';
 	document.body.appendChild( renderer.domElement );
@@ -121,10 +120,7 @@
 	//my code
 	onRenderFcts.push(function(){
 		var video = arToolkitSource.domElement;
-		var canvas = document.getElementById('canvas')
-		canvas.style.position = 'absolute'
-		canvas.style.top = '0px'
-		canvas.style.left = '0px'
+		var canvas = document.getElementById('canvas');
 		var vector = creeperObj.creeper.position.clone();
 		vector.x-=0.05;
 		var windowWidth = window.innerWidth;
@@ -137,8 +133,8 @@
 		document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y;
 		var ctx = canvas.getContext('2d');
 		var imgData = ctx.getImageData(vector.x, vector.y, 100, 100);
-		ctx.putImageData(imgData, 0, 0);
 		ambientLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
+		ctx.putImageData(imgData, 0, 0);
 		})
 	// run the rendering loop
 	var lastTimeMsec= null
