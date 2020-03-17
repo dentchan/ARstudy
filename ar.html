@@ -11,8 +11,7 @@
 	video {margin-top:200px;}
 </style>
 <body>
-	V3___
-	<canvas id="canvas"></canvas>
+	V1___
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -23,6 +22,7 @@
 		alpha: true
 	});
 	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.domElement.style.position = 'absolute';
 	renderer.domElement.style.top = '200px';
 	renderer.domElement.style.left = '0px';
 	document.body.appendChild( renderer.domElement );
@@ -109,7 +109,7 @@
 	pointLight = new THREE.PointLight(0xffffff, 10, 100, 2) //(顏色:整數，強度:浮點，距離:整數，衰減:浮點)
 	pointLight.position.set(0, 40, 10)
 	pointLight.castShadow = true // 投影
-	//scene.add(pointLight)
+	scene.add(pointLight)
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the whole thing on the page
 	//////////////////////////////////////////////////////////////////////////////////
@@ -120,9 +120,18 @@
 	//my code
 	onRenderFcts.push(function(){
 		var video = arToolkitSource.domElement;
-		var canvas = document.getElementById('canvas');
+		var canvas = document.createElement('canvas')
+		canvas.height = video.videoHeight;
+		canvas.width = video.videoWidth;
+		var ctx = canvas.getContext('2d');
+		ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+// 		document.getElementById('info').textContent = "X:"+ camera.position.x.toFixed(3) + "\nY:" + 
+// 			camera.position.y.toFixed(3) + "\nZ:" + camera.position.z.toFixed(3) + "\nqX:" + 
+// 			camera.quaternion.x.toFixed(3) + "\nqY:" + camera.quaternion.y.toFixed(3) + 
+// 			"\nqZ:" + camera.quaternion.z.toFixed(3) + "\nsX:" + camera.scale.x.toFixed(3) + 
+// 			"\nsY:" + camera.scale.y.toFixed(3) + "\nsZ:" + camera.scale.z.toFixed(3)
 		var vector = creeperObj.creeper.position.clone();
-		vector.x-=0.05;
+		vector.x-=0.02;
 		var windowWidth = window.innerWidth;
 		var widthHalf = (windowWidth/2);
 		var heightHalf = (window.innerHeight/2);
@@ -130,11 +139,10 @@
 		vector.x = ( vector.x * widthHalf ) + widthHalf;
 		vector.y = - ( vector.y * heightHalf ) + heightHalf;
 		vector.z = 0;
-		document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y;
-		var ctx = canvas.getContext('2d');
-		var imgData = ctx.getImageData(vector.x, vector.y, 100, 100);
-		ambientLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
-		ctx.putImageData(imgData, 0, 0);
+		var imgData = ctx.getImageData(vector.x, vector.y-2, 1, 1);
+		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
+		document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y + 
+			"\nr:"+ imgData.data[0]+"g:"+imgData.data[1]+"b:"+imgData.data[2];
 		})
 	// run the rendering loop
 	var lastTimeMsec= null
