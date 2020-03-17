@@ -10,7 +10,7 @@
 	body { margin: 0; }
 </style>
 <body>
-	V0
+	V1
 	<font id='info'></font>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
@@ -157,7 +157,7 @@
 		ctx.drawImage(video, vectorLT.x, vectorLT.y, sideL, sideL,0,0,sideL,sideL);
 		var imgData = ctx.getImageData(vectorLT.x+(sideL/2), vectorLT.y+(sideL/2), 1, 1);
 		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
-		document.getElementById('info').innerText = " rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")"
+		document.getElementById('info').innerText = " "+vectorLT.x+" "+vectorLT.y;
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
