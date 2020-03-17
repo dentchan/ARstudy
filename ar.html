@@ -10,7 +10,7 @@
 	body { margin: 0; }
 </style>
 <body>
-	V1
+	V0
 	<font id='info'></font>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
@@ -137,6 +137,7 @@
 		output.project(camera);
 		output.x = Math.round((output.x + 1)*video.videoWidth/2);
 		output.y = Math.round((-output.y + 1)*video.videoHeight/2);
+		return output;
 	}
 	//////////////////////////////////////////////////////////////////////////////////
 	//		change the light color
