@@ -137,7 +137,7 @@
 		document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y;
 		var ctx = canvas.getContext('2d');
 		var imgData = ctx.getImageData(vector.x, vector.y, 100, 100);
-		canvas.putImageData(imgData);
+		ctx.putImageData(imgData, 0, 0);
 		ambientLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		})
 	// run the rendering loop
