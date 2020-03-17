@@ -11,7 +11,8 @@
 	video {margin-top:200px;}
 </style>
 <body>
-	V3___
+	V4___
+	<canvas id="canvas"></canvas>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -120,7 +121,7 @@
 	//my code
 	onRenderFcts.push(function(){
 		var video = arToolkitSource.domElement;
-		var canvas = document.createElement('canvas')
+		var canvas = document.getElementById('canvas')
 		canvas.height = video.videoHeight;
 		canvas.width = video.videoWidth;
 // 		document.getElementById('info').textContent = "X:"+ camera.position.x.toFixed(3) + "\nY:" + 
