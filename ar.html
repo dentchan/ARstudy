@@ -11,7 +11,7 @@
 	video {margin-top:200px;}
 </style>
 <body>
-	V1___
+	V2___
 	<canvas id="canvas"></canvas>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
@@ -142,7 +142,6 @@
 		var ctx = canvas.getContext('2d');
 		var imgData = ctx.getImageData(vector.x, vector.y-2, 100, 100);
 		canvas.putImageData(imgData);
-		canvas.style.top = '200px';
 		ambientLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y + 
 			"\nr:"+ imgData.data[0]+"g:"+imgData.data[1]+"b:"+imgData.data[2];
