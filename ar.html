@@ -10,8 +10,12 @@
 	body { margin: 0; }
 </style>
 <body>
-	V___
+	<font id='info'>V0</font>
 <script>
+	//////////////////////////////////////////////////////////////////////////////////
+	//		vars
+	//////////////////////////////////////////////////////////////////////////////////
+	var marginTop = 50;
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
 	//////////////////////////////////////////////////////////////////////////////////
@@ -22,16 +26,13 @@
 	});
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	renderer.domElement.style.position = 'absolute';
-	renderer.domElement.style.top = '0px';
+	renderer.domElement.style.top = marginTop+'px';
 	renderer.domElement.style.left = '0px';
-	document.body.appendChild( renderer.domElement );
+	document.body.appendChild(renderer.domElement);
 	// array of functions for the rendering loop
 	var onRenderFcts= [];
 	// init scene and camera
 	var scene	= new THREE.Scene();
-	//////////////////////////////////////////////////////////////////////////////////
-	//		Initialize a basic camera
-	//////////////////////////////////////////////////////////////////////////////////
 	// Create a camera
 	var camera = new THREE.Camera();
 	scene.add(camera);
@@ -62,6 +63,8 @@
 			arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)
 		}
 	}
+	var video = arToolkitSource.domElement;
+	video.style.marginTop = marginTop+'px';
 	////////////////////////////////////////////////////////////////////////////////
 	//          initialize arToolkitContext
 	////////////////////////////////////////////////////////////////////////////////
@@ -105,46 +108,42 @@
 	// 設置環境光提供輔助柔和白光
 	ambientLight = new THREE.AmbientLight()
 	scene.add(ambientLight)
-	//建立點光源
-	pointLight = new THREE.PointLight(0xffffff, 10, 100, 2) //(顏色:整數，強度:浮點，距離:整數，衰減:浮點)
+	//建立點光源(顏色:整數，強度:浮點，距離:整數，衰減:浮點)
+	pointLight = new THREE.PointLight(0xffffff, 10, 100, 2) 
 	pointLight.position.set(0, 40, 10)
 	pointLight.castShadow = true // 投影
-	//scene.add(pointLight)
+	scene.add(pointLight)
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the whole thing on the page
 	//////////////////////////////////////////////////////////////////////////////////
-	// render the scene
 	onRenderFcts.push(function(){
 		renderer.render( scene, camera );
 	})
-	//my code
+	//////////////////////////////////////////////////////////////////////////////////
+	//		add subscreen
+	//////////////////////////////////////////////////////////////////////////////////
+	var canvas = document.createElement('canvas');
+	canvas.style.position = 'absolute';
+	canvas.style.marginTop = '200px';
+	canvas.height = video.videoHeight;
+	canvas.width = video.videoWidth;
+	document.body.appendChild(canvas);
+	//////////////////////////////////////////////////////////////////////////////////
+	//		change the light color
+	//////////////////////////////////////////////////////////////////////////////////
 	onRenderFcts.push(function(){
-		var video = arToolkitSource.domElement;
-		video.style.marginTop = '0px';
-		var canvas = document.createElement('canvas');
-		canvas.style.position = 'absolute';
-		canvas.style.marginTop = '200px';
-		canvas.height = video.videoHeight;
-		canvas.width = video.videoWidth;
-		//document.body.appendChild(canvas);
 		var ctx = canvas.getContext('2d');
 		var vector = creeperObj.creeper.position.clone();
-		//vector.x-=0.05;
-		var windowWidth = window.innerWidth;
-		var widthHalf = (windowWidth/2);
-		var heightHalf = (window.innerHeight/2);
 		vector.project(camera);
-		//vector.x = ( vector.x * widthHalf +1) + widthHalf - 10;
-		//vector.y = - ( vector.y * heightHalf ) + heightHalf - 10;
 		vector.x = Math.round((vector.x + 1)*canvas.width/2);
 		vector.y = Math.round((-vector.y+1)*canvas.height/2);
 		ctx.drawImage(video, vector.x, vector.y, 10, 10,0,0,10,10);
 		var imgData = ctx.getImageData(0, 0, 1, 1);
 		ambientLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
-		//document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y + 
-		//	"\nr:"+ imgData.data[0]+"g:"+imgData.data[1]+"b:"+imgData.data[2];
-		})
-	// run the rendering loop
+	})
+	//////////////////////////////////////////////////////////////////////////////////
+	//		randering loop
+	//////////////////////////////////////////////////////////////////////////////////
 	var lastTimeMsec= null
 	requestAnimationFrame(function animate(nowMsec){
 		// keep looping
