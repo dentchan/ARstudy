@@ -10,7 +10,7 @@
 	body { margin: 0; }
 </style>
 <body>
-	V0
+	V1
 	<font id='info'></font>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
@@ -38,7 +38,7 @@
 	var camera = new THREE.Camera();
 	scene.add(camera);
 	////////////////////////////////////////////////////////////////////////////////
-	//          handle arToolkitSource
+	//		  handle arToolkitSource
 	////////////////////////////////////////////////////////////////////////////////
 	var arToolkitSource = new THREEx.ArToolkitSource({
 		// to read from the webcam
@@ -67,7 +67,7 @@
 	var video = arToolkitSource.domElement;
 	video.style.marginTop = marginTop+'px';
 	////////////////////////////////////////////////////////////////////////////////
-	//          initialize arToolkitContext
+	//		  initialize arToolkitContext
 	////////////////////////////////////////////////////////////////////////////////
 	// create atToolkitContext
 	var arToolkitContext = new THREEx.ArToolkitContext({
@@ -87,7 +87,7 @@
 		scene.visible = camera.visible
 	})
 	////////////////////////////////////////////////////////////////////////////////
-	//          Create a ArMarkerControls
+	//		  Create a ArMarkerControls
 	////////////////////////////////////////////////////////////////////////////////
 	// init controls for camera
 	var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
@@ -126,20 +126,35 @@
 	var canvas = document.createElement('canvas');
 	document.body.appendChild(canvas);
 	canvas.style.position = 'absolute';
-	canvas.style.marginTop = (marginTop+video.videoHeight)+'px';
+	canvas.style.marginTop = (marginTop+window.innerHeight)+'px';
 	canvas.height = 100;
 	canvas.width = 100;
+	//////////////////////////////////////////////////////////////////////////////////
+	//		toScreenXY
+	//////////////////////////////////////////////////////////////////////////////////
+	function toScreenXY(vector, camera, video) {
+		var output = vector.clone();
+		output.project(camera);
+		output.x = Math.round((output.x + 1)*video.videoWidth/2);
+		output.y = Math.round((-output.y + 1)*video.videoHeight/2);
+	}
 	//////////////////////////////////////////////////////////////////////////////////
 	//		change the light color
 	//////////////////////////////////////////////////////////////////////////////////
 	onRenderFcts.push(function(){
 		var ctx = canvas.getContext('2d');
-		var vector = creeperObj.creeper.position.clone();
-		vector.project(camera);
-		vector.x = Math.round((vector.x + 1)*video.videoWidth/2);
-		vector.y = Math.round((-vector.y + 1)*video.videoHeight/2);
-		ctx.drawImage(video, vector.x-50, vector.y-50, 100, 100,0,0,100,100);
-		var imgData = ctx.getImageData(0, 0, 1, 1);
+		var tempvector = creeperObj.creeper.position.clone();
+		tempvector.x -= 0.5;
+		tempvector.z -= 0.5;
+		var vectorLT = toScreenXY(tempvector, camera, video);
+		tempvector.x += 0.5;
+		tempvector.z += 0.5;
+		var vectorRB = toScreenXY(tempvector, camera, video);
+		var disX = Math.abs(vectorLT.x - vectorRB.x);
+		var disY = Math.abs(vectorLT.y - vectorRB.y);
+		var sideL = Math.max(disX,disY);
+		ctx.drawImage(video, vectorLT.x, vectorLT.y, sideL, sideL,0,0,sideL,sideL);
+		var imgData = ctx.getImageData(vectorLT.x+(sideL/2), vectorLT.y+(sideL/2), 1, 1);
 		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		document.getElementById('info').innerText = " rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")"
 	})
