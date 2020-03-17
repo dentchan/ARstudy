@@ -126,7 +126,6 @@
 	var canvas = document.createElement('canvas');
 	document.body.appendChild(canvas);
 	canvas.style.position = 'absolute';
-	canvas.style.marginTop = (window.innerHeight)+'px';
 	canvas.height = 100;
 	canvas.width = 100;
 	//////////////////////////////////////////////////////////////////////////////////
@@ -143,6 +142,7 @@
 	//		change the light color
 	//////////////////////////////////////////////////////////////////////////////////
 	onRenderFcts.push(function(){
+		canvas.style.marginTop = videoHeight+'px';
 		var ctx = canvas.getContext('2d');
 		var tempvector = creeperObj.creeper.position.clone();
 		tempvector.x -= 0.5;
