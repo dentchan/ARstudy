@@ -10,7 +10,7 @@
 	body { margin: 0; }
 </style>
 <body>
-	V1___
+	V2___
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -136,7 +136,7 @@
 		vector.project(camera);
 		vector.x = ( vector.x * widthHalf ) + widthHalf;
 		vector.y = - ( vector.y * heightHalf ) + heightHalf;
-		ctx.drawImage(video, vector.x-50, vector.y-50, 100, 100);
+		ctx.drawImage(video, vector.x-50, vector.y-50, 100, 100,0,0,100,100);
 		//var imgData = ctx.getImageData(vector.x-50, vector.y-50, 100, 100);
 		//ambientLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		//document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y + 
