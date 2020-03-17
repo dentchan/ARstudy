@@ -10,7 +10,7 @@
 	body { margin: 0; }
 </style>
 <body>
-	V1
+	V2
 	<font id='info'></font>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
@@ -37,14 +37,6 @@
 	// Create a camera
 	var camera = new THREE.Camera();
 	scene.add(camera);
-	//////////////////////////////////////////////////////////////////////////////////
-	//		add subscreen
-	//////////////////////////////////////////////////////////////////////////////////
-	var canvas = document.createElement('canvas');
-	document.body.appendChild(canvas);
-	canvas.style.position = 'absolute';
-	canvas.height = 100;
-	canvas.width = 100;
 	////////////////////////////////////////////////////////////////////////////////
 	//		  handle arToolkitSource
 	////////////////////////////////////////////////////////////////////////////////
@@ -93,7 +85,6 @@
 		arToolkitContext.update( arToolkitSource.domElement )
 		// update scene.visible if the marker is seen
 		scene.visible = camera.visible
-		canvas.style.marginTop = (marginTop+video.videoHeight)+'px';
 	})
 	////////////////////////////////////////////////////////////////////////////////
 	//		  Create a ArMarkerControls
@@ -130,6 +121,16 @@
 		renderer.render( scene, camera );
 	})
 	//////////////////////////////////////////////////////////////////////////////////
+	//		add subscreen
+	//////////////////////////////////////////////////////////////////////////////////
+	var canvas = document.createElement('canvas');
+	document.body.appendChild(canvas);
+	canvas.style.position = 'absolute';
+	canvas.style.marginTop = marginTop+'px';
+	canvas.style.marginLeft = '0px';
+	canvas.height = 100;
+	canvas.width = 100;
+	//////////////////////////////////////////////////////////////////////////////////
 	//		toScreenXY
 	//////////////////////////////////////////////////////////////////////////////////
 	function toScreenXY(vector, camera, video) {
@@ -145,11 +146,11 @@
 	onRenderFcts.push(function(){
 		var ctx = canvas.getContext('2d');
 		var tempvector = creeperObj.creeper.position.clone();
-		tempvector.x -= 0.5;
-		tempvector.z -= 0.5;
+		tempvector.x -= 0.6;
+		tempvector.z -= 0.6;
 		var vectorLT = toScreenXY(tempvector, camera, video).clone();
-		tempvector.x += 1;
-		tempvector.z += 1;
+		tempvector.x += 1.2;
+		tempvector.z += 1.2;
 		var vectorRB = toScreenXY(tempvector, camera, video).clone();
 		var disX = Math.abs(vectorLT.x - vectorRB.x);
 		var disY = Math.abs(vectorLT.y - vectorRB.y);
