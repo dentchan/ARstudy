@@ -125,11 +125,6 @@
 		canvas.style.position = 'absolute'
 		canvas.style.top = '0px'
 		canvas.style.left = '0px'
-// 		document.getElementById('info').textContent = "X:"+ camera.position.x.toFixed(3) + "\nY:" + 
-// 			camera.position.y.toFixed(3) + "\nZ:" + camera.position.z.toFixed(3) + "\nqX:" + 
-// 			camera.quaternion.x.toFixed(3) + "\nqY:" + camera.quaternion.y.toFixed(3) + 
-// 			"\nqZ:" + camera.quaternion.z.toFixed(3) + "\nsX:" + camera.scale.x.toFixed(3) + 
-// 			"\nsY:" + camera.scale.y.toFixed(3) + "\nsZ:" + camera.scale.z.toFixed(3)
 		var vector = creeperObj.creeper.position.clone();
 		vector.x-=0.05;
 		var windowWidth = window.innerWidth;
@@ -139,12 +134,12 @@
 		vector.x = ( vector.x * widthHalf ) + widthHalf;
 		vector.y = - ( vector.y * heightHalf ) + heightHalf;
 		vector.z = 0;
-		var ctx = canvas.getContext('2d');
-		var imgData = ctx.getImageData(long(vector.x), long(vector.y), 100, 100);
-		canvas.putImageData(imgData);
-		ambientLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y + 
 			"\nr:"+ imgData.data[0]+"g:"+imgData.data[1]+"b:"+imgData.data[2];
+		var ctx = canvas.getContext('2d');
+		var imgData = ctx.getImageData(vector.x, vector.y, 100, 100);
+		canvas.putImageData(imgData);
+		ambientLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		})
 	// run the rendering loop
 	var lastTimeMsec= null
