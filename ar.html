@@ -122,6 +122,9 @@
 	onRenderFcts.push(function(){
 		var video = arToolkitSource.domElement;
 		var canvas = document.getElementById('canvas')
+		canvas.style.position = 'absolute'
+		canvas.style.top = '0px'
+		canvas.style.left = '0px'
 		canvas.height = video.videoHeight;
 		canvas.width = video.videoWidth;
 // 		document.getElementById('info').textContent = "X:"+ camera.position.x.toFixed(3) + "\nY:" + 
