@@ -140,7 +140,7 @@
 		vector.y = - ( vector.y * heightHalf ) + heightHalf;
 		vector.z = 0;
 		var ctx = canvas.getContext('2d');
-		var imgData = ctx.getImageData(vector.x, vector.y-2, 100, 100);
+		var imgData = ctx.getImageData((long)vector.x, (long)vector.y, 100, 100);
 		canvas.putImageData(imgData);
 		ambientLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		document.getElementById('info').textContent = "x:" + vector.x + "y:" + vector.y + 
