@@ -10,7 +10,7 @@
 	body { margin: 0; }
 </style>
 <body>
-	V0___
+	V1___
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -122,6 +122,7 @@
 		var video = arToolkitSource.domElement;
 		video.style.marginTop = '0px';
 		var canvas = document.createElement('canvas');
+		canvas.style.position = 'absolute';
 		canvas.style.marginTop = '200px';
 		canvas.height = video.videoHeight;
 		canvas.width = video.videoWidth;
