@@ -10,7 +10,7 @@
 	body { margin: 0; }
 </style>
 <body>
-	V0
+	V1
 	<font id='info'></font>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
@@ -147,14 +147,14 @@
 		var tempvector = creeperObj.creeper.position.clone();
 		tempvector.x -= 0.5;
 		tempvector.z -= 0.5;
-		var vectorLT = toScreenXY(tempvector, camera, video);
+		var vectorLT = toScreenXY(tempvector, camera, video).clone();
 		tempvector.x += 0.5;
 		tempvector.z += 0.5;
-		var vectorRB = toScreenXY(tempvector, camera, video);
+		var vectorRB = toScreenXY(tempvector, camera, video).clone();
 		var disX = Math.abs(vectorLT.x - vectorRB.x);
 		var disY = Math.abs(vectorLT.y - vectorRB.y);
 		var sideL = Math.max(disX,disY);
-		ctx.drawImage(video, vectorLT.x, vectorLT.y, sideL, sideL,0,0,sideL,sideL);
+		ctx.drawImage(video, vectorLT.x, vectorLT.y, sideL, sideL,0,0,100,100);
 		var imgData = ctx.getImageData(sideL/2, sideL/2, 1, 1);
 		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		document.getElementById('info').innerText = " "+vectorLT.x+" "+vectorLT.y;
