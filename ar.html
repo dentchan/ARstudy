@@ -10,7 +10,7 @@
 	body { margin: 0; }
 </style>
 <body>
-	V2___
+	V2.1___
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -126,7 +126,7 @@
 		var ctx = canvas.getContext('2d');
 		ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 		var vector = creeperObj.creeper.position.clone();
-		vector.x-=0.005;
+		vector.x-=0.01;
 		var windowWidth = window.innerWidth;
 		var widthHalf = (windowWidth/2);
 		var heightHalf = (window.innerHeight/2);
