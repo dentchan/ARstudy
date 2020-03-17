@@ -10,7 +10,7 @@
 	body { margin: 0; }
 </style>
 <body>
-	V1
+	V2
 	<font id='info'></font>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
@@ -144,20 +144,21 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	onRenderFcts.push(function(){
 		var ctx = canvas.getContext('2d');
-		var tempvector = creeperObj.creeper.position.clone();
-		tempvector.x -= 0.5;
-		tempvector.z -= 0.5;
-		var vectorLT = toScreenXY(tempvector, camera, video).clone();
-		tempvector.x += 0.5;
-		tempvector.z += 0.5;
-		var vectorRB = toScreenXY(tempvector, camera, video).clone();
-		var disX = Math.abs(vectorLT.x - vectorRB.x);
-		var disY = Math.abs(vectorLT.y - vectorRB.y);
-		var sideL = Math.max(disX,disY);
-		ctx.drawImage(video, vectorLT.x, vectorLT.y, sideL, sideL,0,0,100,100);
-		var imgData = ctx.getImageData(sideL/2, sideL/2, 1, 1);
+		// var tempvector = creeperObj.creeper.position.clone();
+		// tempvector.x -= 0.5;
+		// tempvector.z -= 0.5;
+		// var vectorLT = toScreenXY(tempvector, camera, video).clone();
+		// tempvector.x += 0.5;
+		// tempvector.z += 0.5;
+		// var vectorRB = toScreenXY(tempvector, camera, video).clone();
+		// var disX = Math.abs(vectorLT.x - vectorRB.x);
+		// var disY = Math.abs(vectorLT.y - vectorRB.y);
+		// var sideL = Math.max(disX,disY);
+		var vector = toScreenXY(creeperObj.creeper.position, camera, video);
+		ctx.drawImage(video, vector.x-100, vector.y-100, 100, 100,0,0,200,200);
+		var imgData = ctx.getImageData(vector, vector, 1, 1);
 		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
-		document.getElementById('info').innerText = " "+vectorLT.x+" "+vectorLT.y;
+		document.getElementById('info').innerText = "rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")"
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
