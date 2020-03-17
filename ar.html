@@ -126,9 +126,9 @@
 	var canvas = document.createElement('canvas');
 	document.body.appendChild(canvas);
 	canvas.style.position = 'absolute';
-	canvas.style.marginTop = '200px';
-	canvas.height = 50;
-	canvas.width = 50;
+	canvas.style.marginTop = (marginTop+video.videoHeight)+'px';
+	canvas.height = 100;
+	canvas.width = 100;
 	//////////////////////////////////////////////////////////////////////////////////
 	//		change the light color
 	//////////////////////////////////////////////////////////////////////////////////
@@ -138,7 +138,7 @@
 		vector.project(camera);
 		vector.x = Math.round((vector.x + 1)*video.videoWidth/2);
 		vector.y = Math.round((-vector.y + 1)*video.videoHeight/2);
-		ctx.drawImage(video, vector.x, vector.y, 50, 50,0,0,50,50);
+		ctx.drawImage(video, vector.x-50, vector.y-50, 100, 100,0,0,100,100);
 		var imgData = ctx.getImageData(0, 0, 1, 1);
 		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		document.getElementById('info').innerText = " rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")"
