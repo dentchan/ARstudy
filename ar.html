@@ -125,8 +125,8 @@
 	var canvas = document.createElement('canvas');
 	canvas.style.position = 'absolute';
 	canvas.style.Top = '200px';
-	canvas.height = video.videoHeight;
-	canvas.width = video.videoWidth;
+	canvas.height = 50;
+	canvas.width = 50;
 	document.body.appendChild(canvas);
 	//////////////////////////////////////////////////////////////////////////////////
 	//		change the light color
@@ -140,6 +140,7 @@
 		ctx.drawImage(video, vector.x, vector.y, 50, 50,0,0,50,50);
 		var imgData = ctx.getImageData(0, 0, 1, 1);
 		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
+		document.getElementById('info').innerText += " rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")"
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
