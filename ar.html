@@ -134,10 +134,8 @@
 		var widthHalf = (windowWidth/2);
 		var heightHalf = (window.innerHeight/2);
 		vector.project(camera);
-		//vector.x = ( vector.x * widthHalf ) + widthHalf;
-		vector.x = ( vector.x * widthHalf );
-		//vector.y = - ( vector.y * heightHalf ) + heightHalf;
-		vector.y = - ( vector.y * heightHalf );
+		vector.x = ( vector.x * widthHalf ) + widthHalf - 10;
+		vector.y = - ( vector.y * heightHalf ) + heightHalf - 10;
 		ctx.drawImage(video, vector.x, vector.y, 50, 50,0,0,100,100);
 		var imgData = ctx.getImageData(0, 0, 1, 1);
 		ambientLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
