@@ -169,7 +169,7 @@
 			Math.max(vectorLT.y, vectorLB.y, vectorRB.y, vectorRT.y)
 		);
 		var SideL = Math.max(SSvactorRB.x - SSvactorLT.x, SSvactorRB.y - SSvactorLT.y);
-		ctx.drawImage(video, SSvactorLT.x, SSvactorLT.y sideL, sideL,0,0,100,100);
+		ctx.drawImage(video, SSvactorLT.x, SSvactorLT.y, sideL, sideL,0,0,100,100);
 		var imgData = ctx.getImageData(sideL/2, sideL/2, 1, 1);
 		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		document.getElementById('info').innerText="V1";
