@@ -148,31 +148,31 @@
 		tempvector.x -= 0.5;
 		tempvector.z -= 0.5;
 		var vectorLT = toScreenXY(tempvector, camera, video).clone();
-		tempvector = creeperObj.creeper.position.clone();
-		tempvector.x += 0.5;
-		tempvector.z -= 0.5;
-		var vectorLB = toScreenXY(tempvector, camera, video).clone();
-		tempvector = creeperObj.creeper.position.clone();
-		tempvector.x -= 0.5;
-		tempvector.z += 0.5;
-		var vectorRT = toScreenXY(tempvector, camera, video).clone();
-		tempvector = creeperObj.creeper.position.clone();
-		tempvector.x += 0.5;
-		tempvector.z += 0.5;
-		var vectorRB = toScreenXY(tempvector, camera, video).clone();
-		var SSvactorLT = THREE.Vector2( 
-			Math.min(vectorLT.x, vectorLB.x, vectorRB.x, vectorRT.x),
-			Math.min(vectorLT.y, vectorLB.y, vectorRB.y, vectorRT.y)
-		);
-		var SSvactorRB = THREE.Vector2( 
-			Math.max(vectorLT.x, vectorLB.x, vectorRB.x, vectorRT.x),
-			Math.max(vectorLT.y, vectorLB.y, vectorRB.y, vectorRT.y)
-		);
+		// tempvector = creeperObj.creeper.position.clone();
+		// tempvector.x += 0.5;
+		// tempvector.z -= 0.5;
+		// var vectorLB = toScreenXY(tempvector, camera, video).clone();
+		// tempvector = creeperObj.creeper.position.clone();
+		// tempvector.x -= 0.5;
+		// tempvector.z += 0.5;
+		// var vectorRT = toScreenXY(tempvector, camera, video).clone();
+		// tempvector = creeperObj.creeper.position.clone();
+		// tempvector.x += 0.5;
+		// tempvector.z += 0.5;
+		// var vectorRB = toScreenXY(tempvector, camera, video).clone();
+		// var SSvactorLT = THREE.Vector2( 
+		// 	Math.min(vectorLT.x, vectorLB.x, vectorRB.x, vectorRT.x),
+		// 	Math.min(vectorLT.y, vectorLB.y, vectorRB.y, vectorRT.y)
+		// );
+		// var SSvactorRB = THREE.Vector2( 
+		// 	Math.max(vectorLT.x, vectorLB.x, vectorRB.x, vectorRT.x),
+		// 	Math.max(vectorLT.y, vectorLB.y, vectorRB.y, vectorRT.y)
+		// );
 		document.getElementById('info').innerText=vectorLT.x+"/"+vectorLT.y;
-		var SideL = Math.max(SSvactorRB.x - SSvactorLT.x, SSvactorRB.y - SSvactorLT.y);
-		ctx.drawImage(video, SSvactorLT.x, SSvactorLT.y, sideL, sideL,0,0,100,100);
-		var imgData = ctx.getImageData(sideL/2, sideL/2, 1, 1);
-		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
+		// var SideL = Math.max(SSvactorRB.x - SSvactorLT.x, SSvactorRB.y - SSvactorLT.y);
+		// ctx.drawImage(video, SSvactorLT.x, SSvactorLT.y, sideL, sideL,0,0,100,100);
+		// var imgData = ctx.getImageData(sideL/2, sideL/2, 1, 1);
+		// pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		
 	})
 	//////////////////////////////////////////////////////////////////////////////////
