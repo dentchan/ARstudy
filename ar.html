@@ -137,6 +137,7 @@
 		output.project(camera);
 		output.x = Math.round((output.x + 1)*video.videoWidth/2);
 		output.y = Math.round((-output.y + 1)*video.videoHeight/2);
+		output.z = 0;
 		return output;
 	}
 	//////////////////////////////////////////////////////////////////////////////////
@@ -168,9 +169,9 @@
 		// 	Math.max(vectorLT.x, vectorLB.x, vectorRB.x, vectorRT.x),
 		// 	Math.max(vectorLT.y, vectorLB.y, vectorRB.y, vectorRT.y)
 		// );
-		document.getElementById('info').innerText=vectorLT.x+"/"+vectorLT.z;
+		document.getElementById('info').innerText=vectorLT.x+"/"+vectorLT.y;
 		// var SideL = Math.max(SSvactorRB.x - SSvactorLT.x, SSvactorRB.y - SSvactorLT.y);
-		// ctx.drawImage(video, SSvactorLT.x, SSvactorLT.y, sideL, sideL,0,0,100,100);
+		 ctx.drawImage(video, vectorLT.x, vectorLT.y, 100, 100,0,0,100,100);
 		// var imgData = ctx.getImageData(sideL/2, sideL/2, 1, 1);
 		// pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		
