@@ -145,21 +145,21 @@
 	onRenderFcts.push(function(){
 		var ctx = canvas.getContext('2d');
 		var tempvector = creeperObj.creeper.position.clone();
-		tempvector.x -= 0.5;
-		tempvector.z -= 0.5;
-		var vectorLT = toScreenXY(tempvector, camera, video).clone();
+		tempvector.x -= 1;
+		tempvector.z -= 1;
+		var vectorLT = toScreenXY(tempvector, camera, video);
 		// tempvector = creeperObj.creeper.position.clone();
 		// tempvector.x += 0.5;
 		// tempvector.z -= 0.5;
-		// var vectorLB = toScreenXY(tempvector, camera, video).clone();
+		// var vectorLB = toScreenXY(tempvector, camera, video);
 		// tempvector = creeperObj.creeper.position.clone();
 		// tempvector.x -= 0.5;
 		// tempvector.z += 0.5;
-		// var vectorRT = toScreenXY(tempvector, camera, video).clone();
+		// var vectorRT = toScreenXY(tempvector, camera, video);
 		// tempvector = creeperObj.creeper.position.clone();
 		// tempvector.x += 0.5;
 		// tempvector.z += 0.5;
-		// var vectorRB = toScreenXY(tempvector, camera, video).clone();
+		// var vectorRB = toScreenXY(tempvector, camera, video);
 		// var SSvactorLT = THREE.Vector2( 
 		// 	Math.min(vectorLT.x, vectorLB.x, vectorRB.x, vectorRT.x),
 		// 	Math.min(vectorLT.y, vectorLB.y, vectorRB.y, vectorRT.y)
@@ -168,7 +168,7 @@
 		// 	Math.max(vectorLT.x, vectorLB.x, vectorRB.x, vectorRT.x),
 		// 	Math.max(vectorLT.y, vectorLB.y, vectorRB.y, vectorRT.y)
 		// );
-		document.getElementById('info').innerText=vectorLT.x+"/"+vectorLT.y;
+		document.getElementById('info').innerText=vectorLT.x+"/"+vectorLT.z;
 		// var SideL = Math.max(SSvactorRB.x - SSvactorLT.x, SSvactorRB.y - SSvactorLT.y);
 		// ctx.drawImage(video, SSvactorLT.x, SSvactorLT.y, sideL, sideL,0,0,100,100);
 		// var imgData = ctx.getImageData(sideL/2, sideL/2, 1, 1);
