@@ -124,9 +124,9 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	var canvas = document.createElement('canvas');
 	document.body.appendChild(canvas);
-	canvas.style.position = 'absolute';
-	canvas.style.marginTop = marginTop+'px';
-	canvas.style.marginLeft = '0px';
+	canvas.style.position = 'fixed';
+	canvas.style.Top = marginTop+'px';
+	canvas.style.Left = '0px';
 	canvas.height = 100;
 	canvas.width = 100;
 	//////////////////////////////////////////////////////////////////////////////////
@@ -145,33 +145,33 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	onRenderFcts.push(function(){
 		var ctx = canvas.getContext('2d');
-		var tempvector = creeperObj.creeper.position.clone();
+		var tempvector = creeperObj.creeper.position;
 		tempvector.x -= 0.5;
 		tempvector.z -= 0.5;
 		var vectorLT = toScreenXY(tempvector, camera, video);
-		// tempvector = creeperObj.creeper.position.clone();
-		// tempvector.x += 0.5;
-		// tempvector.z -= 0.5;
-		// var vectorLB = toScreenXY(tempvector, camera, video);
-		// tempvector = creeperObj.creeper.position.clone();
-		// tempvector.x -= 0.5;
-		// tempvector.z += 0.5;
-		// var vectorRT = toScreenXY(tempvector, camera, video);
-		// tempvector = creeperObj.creeper.position.clone();
-		// tempvector.x += 0.5;
-		// tempvector.z += 0.5;
-		// var vectorRB = toScreenXY(tempvector, camera, video);
-		// var SSvactorLT = THREE.Vector2( 
-		// 	Math.min(vectorLT.x, vectorLB.x, vectorRB.x, vectorRT.x),
-		// 	Math.min(vectorLT.y, vectorLB.y, vectorRB.y, vectorRT.y)
-		// );
-		// var SSvactorRB = THREE.Vector2( 
-		// 	Math.max(vectorLT.x, vectorLB.x, vectorRB.x, vectorRT.x),
-		// 	Math.max(vectorLT.y, vectorLB.y, vectorRB.y, vectorRT.y)
-		// );
-		document.getElementById('info').innerText=vectorLT.x+"/"+vectorLT.y;
-		// var SideL = Math.max(SSvactorRB.x - SSvactorLT.x, SSvactorRB.y - SSvactorLT.y);
-		 ctx.drawImage(video, vectorLT.x, vectorLT.y, 100, 100,0,0,100,100);
+		tempvector = creeperObj.creeper.position;
+		tempvector.x += 0.5;
+		tempvector.z -= 0.5;
+		var vectorLB = toScreenXY(tempvector, camera, video);
+		tempvector = creeperObj.creeper.position;
+		tempvector.x -= 0.5;
+		tempvector.z += 0.5;
+		var vectorRT = toScreenXY(tempvector, camera, video);
+		tempvector = creeperObj.creeper.position;
+		tempvector.x += 0.5;
+		tempvector.z += 0.5;
+		var vectorRB = toScreenXY(tempvector, camera, video);
+		var subvactorLT = THREE.Vector2( 
+			Math.min(vectorLT.x, vectorLB.x, vectorRT.x, vectorRB.x),
+			Math.min(vectorLT.y, vectorLB.y, vectorRT.y, vectorRB.y)
+		);
+		var subvactorRB = THREE.Vector2( 
+			Math.max(vectorLT.x, vectorLB.x, vectorRT.x, vectorRB.x),
+			Math.max(vectorLT.y, vectorLB.y, vectorRT.y, vectorRB.y)
+		);
+		document.getElementById('info').innerText=subvactorLT.x+"/"+subvactorLT.y;
+		// var SideL = Math.max(subvactorRB.x - subvactorLT.x, subvactorRB.y - subvactorLT.y);
+		 ctx.drawImage(video, vectorLT.x, vectorLT.y, 200, 200,0,0,100,100);
 		// var imgData = ctx.getImageData(sideL/2, sideL/2, 1, 1);
 		// pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		
