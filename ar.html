@@ -145,20 +145,20 @@
 	onRenderFcts.push(function(){
 		var ctx = canvas.getContext('2d');
 		var tempvector = creeperObj.creeper.position.clone();
-		tempvector.x -= 0.5;
-		tempvector.z -= 0.5;
+		tempvector.x -= 0.6;
+		tempvector.z -= 0.6;
 		var vectorLT = toScreenXY(tempvector, camera, video);
 		tempvector = creeperObj.creeper.position.clone();
-		tempvector.x += 0.5;
-		tempvector.z -= 0.5;
+		tempvector.x += 0.6;
+		tempvector.z -= 0.6;
 		var vectorLB = toScreenXY(tempvector, camera, video);
 		tempvector = creeperObj.creeper.position.clone();
-		tempvector.x -= 0.5;
-		tempvector.z += 0.5;
+		tempvector.x -= 0.6;
+		tempvector.z += 0.6;
 		var vectorRT = toScreenXY(tempvector, camera, video);
 		tempvector = creeperObj.creeper.position.clone();
-		tempvector.x += 0.5;
-		tempvector.z += 0.5;
+		tempvector.x += 0.6;
+		tempvector.z += 0.6;
 		var vectorRB = toScreenXY(tempvector, camera, video);
 		// document.getElementById('info').innerText = vectorLT.x+"/"+vectorLT.y + " " + vectorLB.x+"/"+vectorLB.y + " " + vectorRT.x+"/"+vectorRT.y + " " + vectorRB.x+"/"+vectorRB.y;
 		var subVectorLT = new THREE.Vector2(0,0);
@@ -190,5 +190,5 @@
 		})
 	})
 </script>
-	<font id="info"></font>
+	<font id="info">V1</font>
 </body>
