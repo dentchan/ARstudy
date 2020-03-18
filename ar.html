@@ -145,19 +145,19 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	onRenderFcts.push(function(){
 		var ctx = canvas.getContext('2d');
-		var tempvector = creeperObj.creeper.position;
+		var tempvector = creeperObj.creeper.position.clone();
 		tempvector.x -= 0.5;
 		tempvector.z -= 0.5;
 		var vectorLT = toScreenXY(tempvector, camera, video);
-		tempvector = creeperObj.creeper.position;
+		tempvector = creeperObj.creeper.position.clone();
 		tempvector.x += 0.5;
 		tempvector.z -= 0.5;
 		var vectorLB = toScreenXY(tempvector, camera, video);
-		tempvector = creeperObj.creeper.position;
+		tempvector = creeperObj.creeper.position.clone();
 		tempvector.x -= 0.5;
 		tempvector.z += 0.5;
 		var vectorRT = toScreenXY(tempvector, camera, video);
-		tempvector = creeperObj.creeper.position;
+		tempvector = creeperObj.creeper.position.clone();
 		tempvector.x += 0.5;
 		tempvector.z += 0.5;
 		var vectorRB = toScreenXY(tempvector, camera, video);
