@@ -161,17 +161,8 @@
 		tempvector.x += 0.5;
 		tempvector.z += 0.6;
 		var vectorRB = toScreenXY(tempvector, camera, video);
-		var subvactorLT = THREE.Vector2( 
-			Math.max(Math.min(vectorLT.x, vectorLB.x, vectorRT.x, vectorRB.x), 0),
-			Math.max(Math.min(vectorLT.y, vectorLB.y, vectorRT.y, vectorRB.y), 0)
-		);
-		var subvactorRB = THREE.Vector2( 
-			Math.max(vectorLT.x, vectorLB.x, vectorRT.x, vectorRB.x),
-			Math.max(vectorLT.y, vectorLB.y, vectorRT.y, vectorRB.y)
-		);
-		document.getElementById('info').innerText=subvactorLT.x+"/"+subvactorLT.y;
-		var SideL = Math.max(subvactorRB.x - subvactorLT.x, subvactorRB.y - subvactorLT.y);
-		ctx.drawImage(video, subvactorLT.x, subvactorLT.y, sideL, sideL,0,0,100,100);
+		document.getElementById('info').innerText = vectorLT.x+"/"+vectorLT.y + " " + vectorLB.x+"/"+vectorLB.y + " " + vectorRT.x+"/"+vectorRT.y + " " + vectorRB.x+"/"+vectorRB.y;
+		ctx.drawImage(video, vectorLT.x, vectorLT.y, 200, 200,0,0,100,100);
 		// var imgData = ctx.getImageData(sideL/2, sideL/2, 1, 1);
 		// pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		
