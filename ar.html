@@ -145,21 +145,21 @@
 	onRenderFcts.push(function(){
 		var ctx = canvas.getContext('2d');
 		var tempvector = creeperObj.creeper.position.clone();
-		tempvector.x -= 1;
-		tempvector.z -= 1;
+		tempvector.x -= 0.5;
+		tempvector.z -= 0.5;
 		var vectorLT = toScreenXY(tempvector, camera, video).clone();
 		tempvector = creeperObj.creeper.position.clone();
-		tempvector.x += 1;
-		tempvector.z -= 1;
+		tempvector.x += 0.5;
+		tempvector.z -= 0.5;
 		var vectorLB = toScreenXY(tempvector, camera, video).clone();
 		tempvector = creeperObj.creeper.position.clone();
-		tempvector.x += 1;
-		tempvector.z += 1;
-		var vectorRB = toScreenXY(tempvector, camera, video).clone();
-		tempvector = creeperObj.creeper.position.clone();
-		tempvector.x -= 1;
-		tempvector.z += 1;
+		tempvector.x -= 0.5;
+		tempvector.z += 0.5;
 		var vectorRT = toScreenXY(tempvector, camera, video).clone();
+		tempvector = creeperObj.creeper.position.clone();
+		tempvector.x += 0.5;
+		tempvector.z += 0.5;
+		var vectorRB = toScreenXY(tempvector, camera, video).clone();
 		var SSvactorLT = THREE.Vector2( 
 			Math.min(vectorLT.x, vectorLB.x, vectorRB.x, vectorRT.x),
 			Math.min(vectorLT.y, vectorLB.y, vectorRB.y, vectorRT.y)
