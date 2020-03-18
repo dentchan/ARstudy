@@ -162,10 +162,10 @@
 		var vectorRB = toScreenXY(tempvector, camera, video);
 		// document.getElementById('info').innerText = vectorLT.x+"/"+vectorLT.y + " " + vectorLB.x+"/"+vectorLB.y + " " + vectorRT.x+"/"+vectorRT.y + " " + vectorRB.x+"/"+vectorRB.y;
 		var subVectorLT = new THREE.Vector2(0,0);
-		subVectorLT.x = Math.max(0, Math.min(vectorLT.x, vectorLB.x, vectorRT.x, vectorRB.x))-2;
+		subVectorLT.x = Math.max(0, Math.min(vectorLT.x, vectorLB.x, vectorRT.x, vectorRB.x))-10;
 		subVectorLT.y = Math.max(0, Math.min(vectorLT.y, vectorLB.y, vectorRT.y, vectorRB.y));
 		var subVectorRB = new THREE.Vector2(200,200);
-		subVectorRB.x = Math.max(0, Math.max(vectorLT.x, vectorLB.x, vectorRT.x, vectorRB.x))-2;
+		subVectorRB.x = Math.max(0, Math.max(vectorLT.x, vectorLB.x, vectorRT.x, vectorRB.x))-10;
 		subVectorRB.y = Math.max(0, Math.max(vectorLT.y, vectorLB.y, vectorRT.y, vectorRB.y));
 		var sideL = Math.max(0, subVectorRB.x - subVectorLT.x, subVectorRB.y - subVectorLT.y);
 		ctx.drawImage(video, subVectorLT.x, subVectorLT.y, sideL, sideL,0,0,100,100);
