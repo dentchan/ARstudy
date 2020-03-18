@@ -123,9 +123,9 @@
 	//		add subscreen
 	//////////////////////////////////////////////////////////////////////////////////
 	var canvas = document.createElement('canvas');
-	video.appendChild(canvas);
+	document.body.appendChild(canvas);
 	canvas.style.position = 'absolute';
-	canvas.style.Top = '0px';
+	canvas.style.Top = marginTop+'px';
 	canvas.style.Left = '0px';
 	canvas.height = 100;
 	canvas.width = 100;
@@ -169,9 +169,9 @@
 			Math.max(vectorLT.x, vectorLB.x, vectorRT.x, vectorRB.x),
 			Math.max(vectorLT.y, vectorLB.y, vectorRT.y, vectorRB.y)
 		);
-		document.getElementById('info').innerText=vectorRB.x+"/"+vectorRB.y;
+		document.getElementById('info').innerText=subvactorLT.x+"/"+subvactorLT.y;
 		var SideL = Math.max(subvactorRB.x - subvactorLT.x, subvactorRB.y - subvactorLT.y);
-		 ctx.drawImage(video, subvactorLT.x, subvactorLT.y, sideL, sideL,0,0,100,100);
+		ctx.drawImage(video, subvactorLT.x, subvactorLT.y, sideL, sideL,0,0,100,100);
 		// var imgData = ctx.getImageData(sideL/2, sideL/2, 1, 1);
 		// pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		
