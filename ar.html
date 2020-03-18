@@ -10,7 +10,6 @@
 	body { margin: 0; }
 </style>
 <body>
-	<font id='info'></font>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		vars
@@ -162,7 +161,7 @@
 		tempvector.z += 0.7;
 		var vectorRB = toScreenXY(tempvector, camera, video);
 		document.getElementById('info').innerText = vectorLT.x+"/"+vectorLT.y + " " + vectorLB.x+"/"+vectorLB.y + " " + vectorRT.x+"/"+vectorRT.y + " " + vectorRB.x+"/"+vectorRB.y;
-		var subVectorLT = new Vector2(0,0);
+		var subVectorLT = new THREE.Vector2(0,0);
 		subVectorLT.x = Math.max(0, Math.min(vectorLT.x, vectorLB.x, vectorRT.x, vectorRB.x));
 		subVectorLT.y = Math.max(0, Math.min(vectorLT.y, vectorLB.y, vectorRT.y, vectorRB.y));
 		ctx.drawImage(video, subVectorLT.x, subVectorLT.y, 200, 200,0,0,100,100);
@@ -187,5 +186,5 @@
 		})
 	})
 </script>
-<font id="info"></font>
+	<font id="info"></font>
 </body>
