@@ -169,8 +169,8 @@
 		subVectorRB.y = Math.max(0, Math.max(vectorLT.y, vectorLB.y, vectorRT.y, vectorRB.y));
 		var sideL = Math.max(0, subVectorRB.x - subVectorLT.x, subVectorRB.y - subVectorLT.y);
 		ctx.drawImage(video, subVectorLT.x, subVectorLT.y, sideL, sideL,0,0,100,100);
-		// var imgData = ctx.getImageData(sideL/2, sideL/2, 1, 1);
-		// pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
+		var imgData = ctx.getImageData(sideL/2, sideL/2, 1, 1);
+		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
 		
 	})
 	//////////////////////////////////////////////////////////////////////////////////
@@ -190,5 +190,5 @@
 		})
 	})
 </script>
-	<font id="info">V1</font>
+	<font id="info">V0</font>
 </body>
