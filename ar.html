@@ -151,7 +151,24 @@
 		// document.getElementById('info').innerText = vectorLT.x+"/"+vectorLT.y + " " + vectorLB.x+"/"+vectorLB.y + " " + vectorRT.x+"/"+vectorRT.y + " " + vectorRB.x+"/"+vectorRB.y;
 		ctx.drawImage(video, vector.x, vector.y, 100, 100,0,0,100,100);
 		var imgData = ctx.getImageData(0, 0, 1, 1);
-		pointLight.color = new THREE.Color("rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")");
+		
+		var oldRGB = math.matrix([imgData.data[0], imgDataata[1], imgData.data[2]]);
+		var RGBtoLMS = math.matrix(
+			[[0.3811, 0.5783, 0.0402], 
+			[0.1967, 0.7244, 0.0782],
+			[0.0241, 0.1288, 0.8444]])
+		var LMS = math.multiply(RGBtoLMS, oldRGB);
+		math.subset(LMS, math.index(0), Math.log(math.subset(LMS, math.index(0))))
+		math.subset(LMS, math.index(1), Math.log(math.subset(LMS, math.index(1))))
+		math.subset(LMS, math.index(2), Math.log(math.subset(LMS, math.index(2))))
+		var LMStoLAB = math.matrix(
+			[[1, 1, 1], 
+			[1, 1, -2],
+			[1, -1, 0]])
+		var LAB = math.multiply(LMStoLAB, LMS);
+		
+		pointLight.color = new THREE.Color("rgb("+math.subset(LAB, math.index(0))+", "+math.subset(LAB, math.index(0))+", "+math.subset(LAB, math.index(0))+")");
+		document.getElementById("info").innerText = "rgb("+math.subset(LAB, math.index(0))+", "+math.subset(LAB, math.index(0))+", "+math.subset(LAB, math.index(0))+")";
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
