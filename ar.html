@@ -172,9 +172,17 @@
 		
 		var LAB = math.multiply(LMStoLAB2, LMStoLAB);
 		LAB = math.multiply(LAB, LMS);
+		math.subset(LAB, math.index(0), 500 - math.subset(LAB, math.index(0)));
+		var LABtoLMS = math.inv(math.multiply(LMStoLAB2, LMStoLAB));
+		LMS = math.multiply(LAB, LABtoLMS);
+		math.subset(LMS, math.index(0), Math.pow(math.subset(LMS, math.index(0)),10))
+		math.subset(LMS, math.index(1), Math.pow(math.subset(LMS, math.index(1)),10))
+		math.subset(LMS, math.index(2), Math.pow(math.subset(LMS, math.index(2)),10))
+		var LMStoRGB = math.inv(RGBtoLMS);
+		RGB = math.multiply(LMS, LMStoRGB);
 		
-		pointLight.color = new THREE.Color("rgb("+math.subset(LAB, math.index(0))+", "+math.subset(LAB, math.index(0))+", "+math.subset(LAB, math.index(0))+")");
-		document.getElementById("info").innerText = "rgb("+math.subset(LAB, math.index(0))+", "+math.subset(LAB, math.index(0))+", "+math.subset(LAB, math.index(0))+")";
+		pointLight.color = new THREE.Color("rgb("+math.subset(RGB, math.index(0))+", "+math.subset(RGB, math.index(0))+", "+math.subset(RGB, math.index(0))+")");
+		document.getElementById("info").innerText = "rgb("+math.subset(RGB, math.index(0))+", "+math.subset(RGB, math.index(0))+", "+math.subset(RGB, math.index(0))+")";
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
