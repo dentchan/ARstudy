@@ -165,7 +165,13 @@
 			[[1, 1, 1], 
 			[1, 1, -2],
 			[1, -1, 0]])
-		var LAB = math.multiply(LMStoLAB, LMS);
+		var LMStoLAB2 = math.matrix(
+			[[0.57735, 0, 0], 
+			[0, 0.40824, 0],
+			[0, 0, 0.7071]])
+		
+		var LAB = math.multiply(LMStoLAB2, LMStoLAB);
+		LAB = math.multiply(LAB, LMS);
 		
 		pointLight.color = new THREE.Color("rgb("+math.subset(LAB, math.index(0))+", "+math.subset(LAB, math.index(0))+", "+math.subset(LAB, math.index(0))+")");
 		document.getElementById("info").innerText = "rgb("+math.subset(LAB, math.index(0))+", "+math.subset(LAB, math.index(0))+", "+math.subset(LAB, math.index(0))+")";
