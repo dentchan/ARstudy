@@ -152,7 +152,7 @@
 		ctx.drawImage(video, vector.x, vector.y, 100, 100,0,0,100,100);
 		var imgData = ctx.getImageData(0, 0, 1, 1);
 		
-		var oldRGB = math.matrix([imgData.data[0], imgDataata[1], imgData.data[2]]);
+		var oldRGB = math.matrix([imgData.data[0], imgData.data[1], imgData.data[2]]);
 		var RGBtoLMS = math.matrix(
 			[[0.3811, 0.5783, 0.0402], 
 			[0.1967, 0.7244, 0.0782],
