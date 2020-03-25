@@ -156,7 +156,7 @@
 		
 		var rgb = [imgData.data[0], imgData.data[1], imgData.data[2]];
 		var xyz = __rgb2xyz__(rgb);
-		var lab = __xyz2lab(xyz);
+		var lab = __xyz2lab__(xyz);
 		
 		pointLight.color = new THREE.Color("rgb("+rgb[0]+", "+rgb[1]+", "+rgb[2]+")");
 		document.getElementById("info1").innerText = "V1 rgb("+rgb[0]+", "+rgb[1]+", "+rgb[2]+")";
