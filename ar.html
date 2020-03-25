@@ -155,10 +155,13 @@
 		var imgData = ctx.getImageData(0, 0, 1, 1);
 		
 		var rgb = [imgData.data[0], imgData.data[1], imgData.data[2]];
-		var LAB = RGB2Lab(rgb);
+		var xyz = __rgb2xyz__(rgb);
+		var lab = __xyz2lab(xyz);
 		
 		pointLight.color = new THREE.Color("rgb("+rgb[0]+", "+rgb[1]+", "+rgb[2]+")");
-		document.getElementById("info").innerText = "V1 rgb("+LAB[0]+", "+LAB[1]+", "+LAB[2]+")";
+		document.getElementById("info1").innerText = "V1 rgb("+rgb[0]+", "+rgb[1]+", "+rgb[2]+")";
+		document.getElementById("info2").innerText = "V1 rgb("+xyz[0]+", "+xyz[1]+", "+xyz[2]+")";
+		document.getElementById("info3").innerText = "V1 rgb("+lab[0]+", "+lab[1]+", "+lab[2]+")";
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
@@ -177,5 +180,7 @@
 		})
 	})
 </script>
-	<font id="info">V1</font>
+	<font id="info1">info1</font><br>
+	<font id="info2">info2</font><br>
+	<font id="info3">info3</font><br>
 </body>
