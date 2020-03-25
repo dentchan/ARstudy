@@ -155,7 +155,7 @@
 		var imgData = ctx.getImageData(0, 0, 1, 1);
 		
 		var rgb = [imgData.data[0], imgData.data[1], imgData.data[2]];
-		var lab = RGB2LAB(rgb);
+		var lab = RGB2Lab(rgb);
 		
 		pointLight.color = new THREE.Color("rgb("+rgb[0]+", "+rgb[1]+", "+rgb[2]+")");
 		document.getElementById("info1").innerText = "rgb("+rgb[0]+", "+rgb[1]+", "+rgb[2]+")";
