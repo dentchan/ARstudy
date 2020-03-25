@@ -16,7 +16,7 @@ function anti_f(im_channel) {
 
 function __rgb2xyz__(rgb) {
 	var rgb = nj.array(rgb)
-	var XYZ = nj.dot(M, rgb.T)
+	var XYZ = nj.dot(M, rgb)
 	XYZ = [XYZ[0] / 255.0, XYZ[1] / 255.0, XYZ[2] / 255.0]
 	return [XYZ[0] / 0.95047, XYZ[1] / 1.0, XYZ[2] / 1.08883]
 }
@@ -54,7 +54,7 @@ function __lab2xyz__(Lab) {
 function __xyz2rgb__(xyz) {
 	xyz = nj.array(xyz)
 	xyz = [xyz[0]*255, xyz[1]*255, xyz[2]*255]
-	var rgb = nj.dot(np.linalg.inv(M), xyz.T)
+	var rgb = nj.dot(np.linalg.inv(M), xyz)
 	rgb = nj.uint8(nj.clip(rgb, 0, 255))
 	return rgb
 }
