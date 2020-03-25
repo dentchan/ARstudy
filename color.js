@@ -22,8 +22,8 @@ function __rgb2xyz__(rgb) {
 }
 
 function __xyz2lab__(xyz) {
-	console.log(xyz)
 	var F_XYZ = [f(xyz[0]), f(xyz[1]), f(xyz[2])]
+	console.log(F_XYZ)
 	L = 116 * xyz[1] > 0.008856 ? F_XYZ[1] - 16 : 903.3 * xyz[1]
 	a = 500 * (F_XYZ[0] - F_XYZ[1])
 	b = 200 * (F_XYZ[1] - F_XYZ[2])
