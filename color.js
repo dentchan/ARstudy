@@ -1,22 +1,22 @@
 // region 辅助函数
 // RGB2XYZ空间的系数矩阵
-var M = nj.array([
+var M =  array([
 	[0.412453, 0.357580, 0.180423],
 	[0.212671, 0.715160, 0.072169],
 	[0.019334, 0.119193, 0.950227]])
 
 // im_channel取值范围：[0,1]
 function f(im_channel) {
-	return im_channel > 0.008856 ? nj.power(im_channel, 1 / 3) : 7.787 * im_channel + 0.137931
+	return im_channel > 0.008856 ?  power(im_channel, 1 / 3) : 7.787 * im_channel + 0.137931
 }
 
 function anti_f(im_channel) {
-	return im_channel > 0.206893 ? nj.power(im_channel, 3) : (im_channel - 0.137931) / 7.787
+	return im_channel > 0.206893 ?  power(im_channel, 3) : (im_channel - 0.137931) / 7.787
 }
 
 function __rgb2xyz__(rgb) {
-	var rgb = nj.array(rgb)
-	var XYZ = nj.dot(M, rgb.T)
+	var rgb =  array(rgb)
+	var XYZ =  dot(M, rgb.T)
 	XYZ = [XYZ[0] / 255.0, XYZ[1] / 255.0, XYZ[2] / 255.0]
 	return [XYZ[0] / 0.95047, XYZ[1] / 1.0, XYZ[2] / 1.08883]
 }
@@ -52,10 +52,10 @@ function __lab2xyz__(Lab) {
 }
 
 function __xyz2rgb__(xyz) {
-	xyz = nj.array(xyz)
+	xyz =  array(xyz)
 	xyz = [xyz[0]*255, xyz[1]*255, xyz[2]*255]
-	var rgb = nj.dot(np.linalg.inv(M), xyz.T)
-	rgb = nj.uint8(nj.clip(rgb, 0, 255))
+	var rgb =  dot(np.linalg.inv(M), xyz.T)
+	rgb =  uint8( clip(rgb, 0, 255))
 	return rgb
 }
 
