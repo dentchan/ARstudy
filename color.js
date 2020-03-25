@@ -7,11 +7,11 @@ var M = nj.array([
 
 // im_channel取值范围：[0,1]
 function f(im_channel) {
-	return im_channel > 0.008856 ? Math.power(im_channel, 1 / 3) : 7.787 * im_channel + 0.137931
+	return im_channel > 0.008856 ? Math.pow(im_channel, 1 / 3) : 7.787 * im_channel + 0.137931
 }
 
 function anti_f(im_channel) {
-	return im_channel > 0.206893 ? Math.power(im_channel, 3) : (im_channel - 0.137931) / 7.787
+	return im_channel > 0.206893 ? Math.pow(im_channel, 3) : (im_channel - 0.137931) / 7.787
 }
 
 function __rgb2xyz__(rgb) {
