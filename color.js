@@ -16,8 +16,8 @@ function anti_f(im_channel) {
 
 function __rgb2xyz__(rgb) {
 	rgb = nj.array(rgb)
-	console.log(rgb.T);
-	var XYZ = nj.dot(M, rgb.T)
+	var XYZ = nj.dot(M, rgb)
+	console.log(XYZ);
 	XYZ = [XYZ[0] / 255.0, XYZ[1] / 255.0, XYZ[2] / 255.0]
 	return [XYZ[0] / 0.95047, XYZ[1] / 1.0, XYZ[2] / 1.08883]
 }
