@@ -54,7 +54,7 @@ function __lab2xyz__(Lab) {
 function __xyz2rgb__(xyz) {
 	xyz = nj.array(xyz)
 	xyz = [xyz.get(0)*255, xyz.get(1)*255, xyz.get(2)*255]
-	var rgb = nj.dot(nj.linalg.inv(M), xyz.T)
+	var rgb = nj.dot(nj.ifft(M), xyz.T)
 	rgb = nj.uint8(nj.clip(rgb, 0, 255))
 	return rgb
 }
