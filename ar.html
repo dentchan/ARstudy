@@ -5,6 +5,7 @@
 <!-- ar.js -->
 <script src="build/ar.js"></script>
 <script src="creeper.js"></script>
+<script src="color.js"></script>
 <script>THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/'</script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js></script>
 <style>
@@ -152,38 +153,11 @@
 		ctx.drawImage(video, vector.x, vector.y, 100, 100,0,0,100,100);
 		var imgData = ctx.getImageData(0, 0, 1, 1);
 		
-// 		var oldRGB = math.matrix([imgData.data[0], imgData.data[1], imgData.data[2]]);
-// 		var RGBtoLMS = math.matrix(
-// 			[[0.3811, 0.5783, 0.0402], 
-// 			[0.1967, 0.7244, 0.0782],
-// 			[0.0241, 0.1288, 0.8444]])
-// 		var LMS = math.multiply(RGBtoLMS, oldRGB);
-// 		math.subset(LMS, math.index(0), Math.log(math.subset(LMS, math.index(0))))
-// 		math.subset(LMS, math.index(1), Math.log(math.subset(LMS, math.index(1))))
-// 		math.subset(LMS, math.index(2), Math.log(math.subset(LMS, math.index(2))))
-// 		var LMStoLAB = math.matrix(
-// 			[[1, 1, 1], 
-// 			[1, 1, -2],
-// 			[1, -1, 0]])
-// 		var LMStoLAB2 = math.matrix(
-// 			[[0.57735, 0, 0], 
-// 			[0, 0.40824, 0],
-// 			[0, 0, 0.7071]])
+		var rgb = [imgData.data[0], imgData.data[1], imgData.data[2]];
+		var LAB = RGB2Lab(rgb);
 		
-// 		var LAB = math.multiply(LMStoLAB2, LMStoLAB);
-// 		LAB = math.multiply(LAB, LMS);
-// 		math.subset(LAB, math.index(0), 500 - math.subset(LAB, math.index(0)));
-// 		var LABtoLMS = math.inv(math.multiply(LMStoLAB2, LMStoLAB));
-// 		LMS = math.multiply(LAB, LABtoLMS);
-// 		math.subset(LMS, math.index(0), Math.pow(math.subset(LMS, math.index(0)),10))
-// 		math.subset(LMS, math.index(1), Math.pow(math.subset(LMS, math.index(1)),10))
-// 		math.subset(LMS, math.index(2), Math.pow(math.subset(LMS, math.index(2)),10))
-// 		var LMStoRGB = math.inv(RGBtoLMS);
-// 		RGB = math.multiply(LMS, LMStoRGB);
-		
-// 		pointLight.color = new THREE.Color("rgb("+math.subset(RGB, math.index(0))+", "+math.subset(RGB, math.index(0))+", "+math.subset(RGB, math.index(0))+")");
-		pointLight.color = new THREE.Color("rgb("+0+", "+0+", "+0+")");
-		document.getElementById("info").innerText = "V1 rgb("+imgData.data[0]+", "+imgData.data[1]+", "+imgData.data[2]+")";
+		pointLight.color = new THREE.Color("rgb("+rgb[0]+", "+rgb[1]+", "+rgb[2]+")");
+		document.getElementById("info").innerText = "V1 rgb("+LAB[0]+", "+LAB[1]+", "+LAB[2]+")";
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
