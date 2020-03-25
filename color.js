@@ -1,5 +1,3 @@
-import * as nj from 'https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js';
-
 // region 辅助函数
 // RGB2XYZ空间的系数矩阵
 var M = nj.array([
