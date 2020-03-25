@@ -5,6 +5,11 @@ var M = nj.array([
 	[0.212671, 0.715160, 0.072169],
 	[0.019334, 0.119193, 0.950227]])
 
+var invM = nj.array([
+	[3.24048134, -1.53715152, -0.49853633],
+	[-0.96925495, 1.87599, 0.04155593],
+	[0.05564664, -0.20404134, 1.05731107]])
+
 // im_channel取值范围：[0,1]
 function f(im_channel) {
 	return im_channel > 0.008856 ? Math.pow(im_channel, 1 / 3) : 7.787 * im_channel + 0.137931
@@ -54,7 +59,7 @@ function __lab2xyz__(Lab) {
 function __xyz2rgb__(xyz) {
 	xyz = nj.array(xyz)
 	xyz = [xyz.get(0)*255, xyz.get(1)*255, xyz.get(2)*255]
-	var rgb = nj.dot(nj.negative(M), xyz.T)
+	var rgb = nj.dot(invM, xyz.T)
 	rgb = nj.uint8(nj.clip(rgb, 0, 255))
 	return rgb
 }
