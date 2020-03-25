@@ -63,7 +63,7 @@ function __xyz2rgb__(xyz) {
 	xyz = nj.array(xyz)
 	var rgb = nj.dot(invM, xyz.T)
 	rgb = nj.uint8(nj.clip(rgb, 0, 255))
-	return rgb
+	return [rgb.get(0), rgb.get(1), rgb.get(2)]
 }
 
 function Lab2RGB(Lab) {
