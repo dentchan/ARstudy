@@ -159,7 +159,7 @@
 		lab[0] -= 50;
 		var nrgb = Lab2RGB(lab);
 		
-		pointLight.color = new THREE.Color("rgb("+nrgb[0]+", "+nrgb[1]+", "+nrgb[2]+")");
+		//pointLight.color = new THREE.Color("rgb("+nrgb[0]+", "+nrgb[1]+", "+nrgb[2]+")");
 		document.getElementById("info1").innerText = "rgb("+rgb[0]+", "+rgb[1]+", "+rgb[2]+")";
 		document.getElementById("info2").innerText = "lab("+lab[0]+", "+lab[1]+", "+lab[2]+")";
 		document.getElementById("info3").innerText = "lab("+nrgb[0]+", "+nrgb[1]+", "+nrgb[2]+")";
