@@ -157,7 +157,7 @@
 		var lab = RGB2Lab(rgb);
 		lab[0] /= 2;
 		var alLab = [lab[0], 0, 0];
-		var alrgb = Lab2RGB(al)
+		var alrgb = Lab2RGB(alLab)
 		var plrgb = Lab2RGB(lab);
 		
 		ambientLight.color = new THREE.Color("rgb("+alrgb[0]+", "+alrgb[1]+", "+alrgb[2]+")");
