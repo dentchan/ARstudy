@@ -150,19 +150,20 @@
 		var tempvector = creeperObj.creeper.position.clone();
 		tempvector.x -= 0.1;
 		var vector = toScreenXY(tempvector, camera, video);
-		// document.getElementById('info').innerText = vectorLT.x+"/"+vectorLT.y + " " + vectorLB.x+"/"+vectorLB.y + " " + vectorRT.x+"/"+vectorRT.y + " " + vectorRB.x+"/"+vectorRB.y;
 		ctx.drawImage(video, vector.x, vector.y, 100, 100,0,0,100,100);
 		var imgData = ctx.getImageData(0, 0, 1, 1);
 		
 		var rgb = [imgData.data[0], imgData.data[1], imgData.data[2]];
 		var lab = RGB2Lab(rgb);
-		lab[0] -= 50;
-		var nrgb = Lab2RGB(lab);
+		lab[0] /= 2;
+		var alLab = [lab[0], 0, 0];
+		var alrgb = Lab2RGB(al)
+		var plrgb = Lab2RGB(lab);
 		
-		pointLight.color = new THREE.Color("rgb("+nrgb[0]+", "+nrgb[1]+", "+nrgb[2]+")");
-		document.getElementById("info1").innerText = "rgb("+rgb[0]+", "+rgb[1]+", "+rgb[2]+")";
-		document.getElementById("info2").innerText = "lab("+lab[0]+", "+lab[1]+", "+lab[2]+")";
-		document.getElementById("info3").innerText = "lab("+nrgb[0]+", "+nrgb[1]+", "+nrgb[2]+")";
+		ambientLight.color = new THREE.Color("rgb("+alrgb[0]+", "+alrgb[1]+", "+alrgb[2]+")");
+		pointLight.color = new THREE.Color("rgb("+plrgb[0]+", "+plrgb[1]+", "+plrgb[2]+")");
+		document.getElementById('info1').innerText = "rgb("+alrgb[0]+", "+alrgb[1]+", "+alrgb[2]+")";
+		document.getElementById('info2').innerText = "rgb("+plrgb[0]+", "+plrgb[1]+", "+plrgb[2]+")";
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
