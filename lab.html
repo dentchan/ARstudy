@@ -30,7 +30,7 @@
 	renderer.domElement.style.position = 'absolute';
 	renderer.domElement.style.top = marginTop+'px';
 	renderer.domElement.style.left = '0px';
-	document.body.appendChild(renderer.domElement);
+	//document.body.appendChild(renderer.domElement);
 	// array of functions for the rendering loop
 	var onRenderFcts= [];
 	// init scene and camera
@@ -121,6 +121,7 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	onRenderFcts.push(function(){
 		renderer.render( scene, camera );
+		ctx.drawImage(renderer.domElement, 0, 0);
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		add subscreen
@@ -128,10 +129,11 @@
 	var canvas = document.createElement('canvas');
 	document.body.appendChild(canvas);
 	canvas.style.position = 'absolute';
-	canvas.style.marginTop = '150px';
-	canvas.style.marginLeft = '25px';
-	canvas.height = 100;
-	canvas.width = 100;
+	canvas.style.marginTop = marginTop+'px';
+	canvas.style.marginLeft = '0px';
+	canvas.height = window.innerWidth;
+	canvas.width = window.innerHeight;
+	var ctx = canvas.getContext('2d');
 	//////////////////////////////////////////////////////////////////////////////////
 	//		toScreenXY
 	//////////////////////////////////////////////////////////////////////////////////
@@ -147,7 +149,6 @@
 	//		change the light color
 	//////////////////////////////////////////////////////////////////////////////////
 	onRenderFcts.push(function(){
-		var ctx = canvas.getContext('2d');
 		var tempvector = creeperObj.creeper.position.clone();
 		tempvector.x -= 0.1;
 		var vector = toScreenXY(tempvector, camera, video);
@@ -166,13 +167,6 @@
 		document.getElementById('info1').innerText = "dfaultLAB("+dfaultLAB[0].toFixed(0)+", "+dfaultLAB[1].toFixed(0)+", "+dfaultLAB[2].toFixed(0)+")";
 		document.getElementById('info2').innerText = "dtectedLAB("+dtectedLAB[0].toFixed(0)+", "+dtectedLAB[1].toFixed(0)+", "+dtectedLAB[2].toFixed(0)+")";
 		document.getElementById('info3').innerText = "lightLAB("+lightLAB[0].toFixed(0)+", "+lightLAB[1].toFixed(0)+", "+lightLAB[2].toFixed(0)+")";
-	})
-	//////////////////////////////////////////////////////////////////////////////////
-	//		change pixels
-	//////////////////////////////////////////////////////////////////////////////////
-	onRenderFcts.push(function(){
-		var ctx = renderer.domElement.getContext('2d');
-		ctx.fillRect(0,0,100,00);
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
