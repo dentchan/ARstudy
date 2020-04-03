@@ -121,7 +121,7 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	onRenderFcts.push(function(){
 		renderer.render( scene, camera );
-		ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+		ctx.clearRect(0, 0, renderer.domElement.width, renderer.domElement.height);
 		ctx.drawImage(renderer.domElement, 0, 0);
 	})
 	//////////////////////////////////////////////////////////////////////////////////
