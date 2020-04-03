@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<!-- three.js library -->
+<script src='vendor/three.js/build/three.min.js'></script>
+<!-- ar.js -->
+<script src="build/ar.js"></script>
+<script src="creeper.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js"></script>
+<script src="color.js"></script>
+<script>THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/'</script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js></script>
+<style>
+	body { margin: 0; }
+</style>
+<body>
+<script>
+	//////////////////////////////////////////////////////////////////////////////////
+	//		vars
+	//////////////////////////////////////////////////////////////////////////////////
+	var marginTop = 50;
+	//////////////////////////////////////////////////////////////////////////////////
+	//		Init
+	//////////////////////////////////////////////////////////////////////////////////
+	// init renderer
+	var renderer = new THREE.WebGLRenderer({
+		antialias: true,
+		alpha: true
+	});
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.domElement.style.position = 'absolute';
+	renderer.domElement.style.top = marginTop+'px';
+	renderer.domElement.style.left = '0px';
+	document.body.appendChild(renderer.domElement);
+	// array of functions for the rendering loop
+	var onRenderFcts= [];
+	// init scene and camera
+	var scene	= new THREE.Scene();
+	// Create a camera
+	var camera = new THREE.Camera();
+	scene.add(camera);
+	////////////////////////////////////////////////////////////////////////////////
+	//		  handle arToolkitSource
+	////////////////////////////////////////////////////////////////////////////////
+	var arToolkitSource = new THREEx.ArToolkitSource({
+		// to read from the webcam
+		sourceType : 'webcam',
+		// to read from an image
+		// sourceType : 'image',
+		// sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg',
+		// to read from a video
+		// sourceType : 'video',
+		// sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',
+	})
+	arToolkitSource.init(function onReady(){
+		onResize()
+	})
+	// handle resize
+	window.addEventListener('resize', function(){
+		onResize()
+	})
+	function onResize(){
+		arToolkitSource.onResizeElement()
+		arToolkitSource.copyElementSizeTo(renderer.domElement)
+		if( arToolkitContext.arController !== null ){
+			arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)
+		}
+	}
+	var video = arToolkitSource.domElement;
+	video.style.marginTop = marginTop+'px';
+	////////////////////////////////////////////////////////////////////////////////
+	//		  initialize arToolkitContext
+	////////////////////////////////////////////////////////////////////////////////
+	// create atToolkitContext
+	var arToolkitContext = new THREEx.ArToolkitContext({
+		cameraParametersUrl: THREEx.ArToolkitContext.baseURL + '../data/data/camera_para.dat',
+		detectionMode: 'mono',
+	})
+	// initialize it
+	arToolkitContext.init(function onCompleted(){
+		// copy projection matrix to camera
+		camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
+	})
+	// update artoolkit on every frame
+	onRenderFcts.push(function(){
+		if( arToolkitSource.ready === false ) return
+		arToolkitContext.update( arToolkitSource.domElement )
+		// update scene.visible if the marker is seen
+		scene.visible = camera.visible
+	})
+	////////////////////////////////////////////////////////////////////////////////
+	//		  Create a ArMarkerControls
+	////////////////////////////////////////////////////////////////////////////////
+	// init controls for camera
+	var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
+		type : 'pattern',
+		// patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.hiro',
+		patternUrl : 'https://raw.githubusercontent.com/54bp6cl6/ARstudy/master/src/pattern-star.patt',
+		// patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.kanji',
+		// as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
+		changeMatrixMode: 'cameraTransformMatrix',
+		smooth: false
+	})
+	// as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
+	scene.visible = false
+	//////////////////////////////////////////////////////////////////////////////////
+	//		add an object in the scene
+	//////////////////////////////////////////////////////////////////////////////////
+	creeperObj = new Creeper();
+	creeperObj.creeper.scale.set(0.1,0.1,0.1);
+	scene.add(creeperObj.creeper)
+	// 設置環境光提供輔助柔和白光
+	ambientLight = new THREE.AmbientLight(0xffffff)
+	scene.add(ambientLight)
+	//建立點光源(顏色:整數，強度:浮點，距離:整數，衰減:浮點)
+	pointLight = new THREE.PointLight(0xffffff, 10, 100, 2) 
+	pointLight.position.set(0, 40, 10)
+	pointLight.castShadow = true // 投影
+	scene.add(pointLight)
+	//////////////////////////////////////////////////////////////////////////////////
+	//		render the whole thing on the page
+	//////////////////////////////////////////////////////////////////////////////////
+	onRenderFcts.push(function(){
+		renderer.render( scene, camera );
+	})
+	//////////////////////////////////////////////////////////////////////////////////
+	//		add subscreen
+	//////////////////////////////////////////////////////////////////////////////////
+	var canvas = document.createElement('canvas');
+	document.body.appendChild(canvas);
+	canvas.style.position = 'absolute';
+	canvas.style.marginTop = '150px';
+	canvas.style.marginLeft = '25px';
+	canvas.height = 100;
+	canvas.width = 100;
+	//////////////////////////////////////////////////////////////////////////////////
+	//		toScreenXY
+	//////////////////////////////////////////////////////////////////////////////////
+	function toScreenXY(vector, camera, video) {
+		var output = vector.clone();
+		output.project(camera);
+		output.x = Math.round((output.x + 1)*video.videoWidth/2);
+		output.y = Math.round((-output.y + 1)*video.videoHeight/2);
+		output.z = 0;
+		return output;
+	}
+	//////////////////////////////////////////////////////////////////////////////////
+	//		randering loop
+	//////////////////////////////////////////////////////////////////////////////////
+	var lastTimeMsec= null
+	requestAnimationFrame(function animate(nowMsec){
+		// keep looping
+		requestAnimationFrame( animate );
+		// measure time
+		lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
+		var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
+		lastTimeMsec	= nowMsec
+		// call each update function
+		onRenderFcts.forEach(function(onRenderFct){
+			onRenderFct(deltaMsec/1000, nowMsec/1000)
+		})
+	})
+</script>
+</body>
