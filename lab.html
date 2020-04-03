@@ -122,7 +122,7 @@
 	onRenderFcts.push(function(){
 		renderer.render( scene, camera );
 		ctx.clearRect(0, 0, renderer.domElement.width, renderer.domElement.height);
-		ctx.drawImage(renderer.domElement);
+		ctx.drawImage(renderer.domElement,0,0);
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		add subscreen
