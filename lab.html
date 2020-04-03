@@ -172,8 +172,8 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	onRenderFcts.push(function(){
 		var ctx = renderer.domElement.getContext('2d');
-		ctx.fillStyle = new THREE.Color("rgb("+255+","+255+","+255+")");
-		ctx.fillRect( x, y, 100, 100 );
+		ctx.fillStyle = new Uint8ClampedArray([255,255,255,1]);
+		ctx.fillRect( 0, 0, 100, 100 );
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
