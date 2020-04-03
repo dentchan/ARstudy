@@ -158,7 +158,8 @@
 		
 		var dtectedRGB = [imgData.data[0], imgData.data[1], imgData.data[2]];
 		var dtectedLAB = RGB2Lab(dtectedRGB);
-		var lightLAB = [dtectedLAB[0]-10, dtectedLAB[1]-dfaultLAB[1], dtectedLAB[2]-dfaultLAB[2]]
+		var amp_factor = 1.2;
+		var lightLAB = [dtectedLAB[0]-10, (dtectedLAB[1]-dfaultLAB[1])*amp_factor, (dtectedLAB[2]-dfaultLAB[2])*amp_factor]
 		var lightRGB = Lab2RGB(lightLAB);
 		pointLight.color = new THREE.Color("rgb("+lightRGB[0]+", "+lightRGB[1]+", "+lightRGB[2]+")");
 		
