@@ -28,9 +28,9 @@
 	});
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	renderer.domElement.style.position = 'absolute';
-	renderer.domElement.style.top = '0px';
+	renderer.domElement.style.top = marginTop+'px';
 	renderer.domElement.style.left = '0px';
-	//document.body.appendChild(renderer.domElement);
+	document.body.appendChild(renderer.domElement);
 	// array of functions for the rendering loop
 	var onRenderFcts= [];
 	// init scene and camera
@@ -106,7 +106,7 @@
 	//		add an object in the scene
 	//////////////////////////////////////////////////////////////////////////////////
 	creeperObj = new Creeper();
-	creeperObj.creeper.scale.set(0.05,0.05,0.05);
+	creeperObj.creeper.scale.set(0.1,0.1,0.1);
 	scene.add(creeperObj.creeper)
 	// 設置環境光提供輔助柔和白光
 	ambientLight = new THREE.AmbientLight(0xffffff)
@@ -121,20 +121,17 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	onRenderFcts.push(function(){
 		renderer.render( scene, camera );
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		ctx.drawImage(renderer.domElement, 0, 0);
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		add subscreen
 	//////////////////////////////////////////////////////////////////////////////////
 	var canvas = document.createElement('canvas');
 	document.body.appendChild(canvas);
-	canvas.style.position = renderer.domElement.style.position;
-	canvas.style.marginTop = '0px';
-	canvas.style.marginLeft = renderer.domElement.style.position.marginLeft;
-	canvas.height = window.innerHeight;
-	canvas.width = window.innerWidth;
-	var ctx = canvas.getContext('2d');
+	canvas.style.position = 'absolute';
+	canvas.style.marginTop = '150px';
+	canvas.style.marginLeft = '25px';
+	canvas.height = 100;
+	canvas.width = 100;
 	//////////////////////////////////////////////////////////////////////////////////
 	//		toScreenXY
 	//////////////////////////////////////////////////////////////////////////////////
@@ -149,37 +146,26 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	//		change the light color
 	//////////////////////////////////////////////////////////////////////////////////
-// 	onRenderFcts.push(function(){
-// 		var tempvector = creeperObj.creeper.position.clone();
-// 		tempvector.x -= 0.1;
-// 		var vector = toScreenXY(tempvector, camera, video);
-// 		ctx.drawImage(video, vector.x, vector.y, 100, 100,0,0,100,100);
-// 		var imgData = ctx.getImageData(0, 0, 1, 1);
-// 		var dfaultRGB = [84, 130, 53]
-// 		var dfaultLAB = RGB2Lab(dfaultRGB);
-		
-// 		var dtectedRGB = [imgData.data[0], imgData.data[1], imgData.data[2]];
-// 		var dtectedLAB = RGB2Lab(dtectedRGB);
-// 		var amp_factor = 1.2;
-// 		var lightLAB = [dtectedLAB[0]-20, (dtectedLAB[1]-dfaultLAB[1])*amp_factor, (dtectedLAB[2]-dfaultLAB[2])*amp_factor]
-// 		var lightRGB = Lab2RGB(lightLAB);
-// 		pointLight.color = new THREE.Color("rgb("+lightRGB[0]+", "+lightRGB[1]+", "+lightRGB[2]+")");
-		
-// 		document.getElementById('info1').innerText = "dfaultLAB("+dfaultLAB[0].toFixed(0)+", "+dfaultLAB[1].toFixed(0)+", "+dfaultLAB[2].toFixed(0)+")";
-// 		document.getElementById('info2').innerText = "dtectedLAB("+dtectedLAB[0].toFixed(0)+", "+dtectedLAB[1].toFixed(0)+", "+dtectedLAB[2].toFixed(0)+")";
-// 		document.getElementById('info3').innerText = "lightLAB("+lightLAB[0].toFixed(0)+", "+lightLAB[1].toFixed(0)+", "+lightLAB[2].toFixed(0)+")";
-// 	})
-	//////////////////////////////////////////////////////////////////////////////////
-	//		change pixels color
-	//////////////////////////////////////////////////////////////////////////////////
 	onRenderFcts.push(function(){
-		var imgData = ctx.getImageData(0, 0, 1000, 1000);
-		for(i = 0; i < imgData.length; i+=4){
-			if(imgData[i+3] > 0){
-				imgData[i] = imgData[i+1] = imgData[i+2] = 255;	
-			}
-		}
-		ctx.putImageData(imgData, 0, 0);
+		var ctx = canvas.getContext('2d');
+		var tempvector = creeperObj.creeper.position.clone();
+		tempvector.x -= 0.1;
+		var vector = toScreenXY(tempvector, camera, video);
+		ctx.drawImage(video, vector.x, vector.y, 100, 100,0,0,100,100);
+		var imgData = ctx.getImageData(0, 0, 1, 1);
+		var dfaultRGB = [84, 130, 53]
+		var dfaultLAB = RGB2Lab(dfaultRGB);
+		
+		var dtectedRGB = [imgData.data[0], imgData.data[1], imgData.data[2]];
+		var dtectedLAB = RGB2Lab(dtectedRGB);
+		var amp_factor = 1.2;
+		var lightLAB = [dtectedLAB[0]-20, (dtectedLAB[1]-dfaultLAB[1])*amp_factor, (dtectedLAB[2]-dfaultLAB[2])*amp_factor]
+		var lightRGB = Lab2RGB(lightLAB);
+		pointLight.color = new THREE.Color("rgb("+lightRGB[0]+", "+lightRGB[1]+", "+lightRGB[2]+")");
+		
+		document.getElementById('info1').innerText = "dfaultLAB("+dfaultLAB[0].toFixed(0)+", "+dfaultLAB[1].toFixed(0)+", "+dfaultLAB[2].toFixed(0)+")";
+		document.getElementById('info2').innerText = "dtectedLAB("+dtectedLAB[0].toFixed(0)+", "+dtectedLAB[1].toFixed(0)+", "+dtectedLAB[2].toFixed(0)+")";
+		document.getElementById('info3').innerText = "lightLAB("+lightLAB[0].toFixed(0)+", "+lightLAB[1].toFixed(0)+", "+lightLAB[2].toFixed(0)+")";
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
