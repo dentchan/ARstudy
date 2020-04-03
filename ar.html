@@ -153,15 +153,17 @@
 		var vector = toScreenXY(tempvector, camera, video);
 		ctx.drawImage(video, vector.x, vector.y, 100, 100,0,0,100,100);
 		var imgData = ctx.getImageData(0, 0, 1, 1);
+		var dfaultRGB = [84, 130, 53]
+		var dfaultLAB = RGB2Lab(dfaultRGB);
 		
-		var rgb = [imgData.data[0], imgData.data[1], imgData.data[2]];
-		var lab = RGB2Lab(rgb);
-		var nrgb;
-		lab[0] -= 50;
-		nrgb = Lab2RGB(lab);
-		pointLight.color = new THREE.Color("rgb("+nrgb[0]+", "+nrgb[1]+", "+nrgb[2]+")");
+		var dtectedRGB = [imgData.data[0], imgData.data[1], imgData.data[2]];
+		var dtectedLAB = RGB2Lab(dtectedRGB);
+		var lightLAB = [dtectedLAB[0]-dfaultLAB[0], dtectedLAB[1]-dfaultLAB[1], dtectedLAB[2]-dfaultLAB[2]]
+		var lightRGB = Lab2RGB(lightLAB);
+		pointLight.color = new THREE.Color("rgb("+lightRGB[0]+", "+lightRGB[1]+", "+lightRGB[2]+")");
 		
-		document.getElementById('info1').innerText = "rgb("+nrgb[0]+", "+nrgb[1]+", "+nrgb[2]+")";
+		document.getElementById('info1').innerText = "rgb("+lightRGB[0]+", "+lightRGB[1]+", "+lightRGB[2]+")";
+		document.getElementById('info2').innerText = "V1"; 
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
