@@ -162,8 +162,9 @@
 		var lightRGB = Lab2RGB(lightLAB);
 		pointLight.color = new THREE.Color("rgb("+lightRGB[0]+", "+lightRGB[1]+", "+lightRGB[2]+")");
 		
-		document.getElementById('info1').innerText = "rgb("+lightRGB[0]+", "+lightRGB[1]+", "+lightRGB[2]+")";
-		document.getElementById('info2').innerText = "V1"; 
+		document.getElementById('info1').innerText = "dfaultLAB("+dfaultLAB[0]+", "+dfaultLAB[1]+", "+dfaultLAB[2]+")";
+		document.getElementById('info2').innerText = "dtectedLAB("+dtectedLAB[0]+", "+dtectedLAB[1]+", "+dtectedLAB[2]+")";
+		document.getElementById('info3').innerText = "lightLAB("+lightLAB[0]+", "+lightLAB[1]+", "+lightLAB[2]+")";
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
