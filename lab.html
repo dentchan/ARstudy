@@ -173,13 +173,13 @@
 	//		change pixels color
 	//////////////////////////////////////////////////////////////////////////////////
 	onRenderFcts.push(function(){
-		var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+		var imgData = ctx.getImageData(0, 0, 1000, 1000);
 		for(i = 0; i < imgData.length; i+=4){
 			if(imgData[i+3] > 0){
 				imgData[i] = imgData[i+1] = imgData[i+2] = 255;	
 			}
 		}
-		ctx.putImageData(imgData, 0, 0, canvas.width, canvas.height);
+		ctx.putImageData(imgData, 0, 0, 1000, 1000);
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
