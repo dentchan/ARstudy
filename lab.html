@@ -132,7 +132,7 @@
 	canvas.style.position = renderer.domElement.style.position;
 	canvas.style.marginTop = '0px';
 	canvas.style.marginLeft = renderer.domElement.style.position.marginLeft;
-	canvas.height = window.innerHeight;
+	canvas.height = video.height;
 	canvas.width = window.innerWidth;
 	var ctx = canvas.getContext('2d');
 	//////////////////////////////////////////////////////////////////////////////////
@@ -175,9 +175,8 @@
 	onRenderFcts.push(function(){
 		var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 		for(i = 0; i < imgData.length; i+=4){
-			if(imgData[i]+imgData[i+1]+imgData[i+2] < 300){
+			if(imgData[i+3] > 0){
 				imgData[i] = imgData[i+1] = imgData[i+2] = 255;	
-				imgData[i+3] = 1;
 			}
 		}
 		ctx.putImageData(imgData, 0, 0);
