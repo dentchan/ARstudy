@@ -170,17 +170,11 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	//		change pixels
 	//////////////////////////////////////////////////////////////////////////////////
-	var id = ctx.createImageData(1,1); // only do this once per page
-	var d  = id.data;                        // only do this once per page
 	var ctx = renderer.domElement.getContext('2d');
 	onRenderFcts.push(function(){
-		d[0]   = 255; //r
-		d[1]   = 255; //g
-		d[2]   = 255; //b
-		d[3]   = 1; //a
 		for(x=0;x<100;x++){
 			for(y=0;y<100;y++){
-				ctx.putImageData( id, x, y );
+				ctx.fillRect(x,y,1,1);
 			}
 		}
 	})
