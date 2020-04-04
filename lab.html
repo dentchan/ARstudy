@@ -4,20 +4,19 @@
 <script src='vendor/three.js/build/three.min.js'></script>
 <!-- ar.js -->
 <script src="build/ar.js"></script>
-<script src="creeper.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js"></script>
-<script src="color.js"></script>
 <script>THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/'</script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js></script>
+<!-- script -->
+<script src="creeper.js"></script>
+<script src="script.js"></script>
+<script src="color.js"></script>
 <style>
 	body { margin: 0; }
+	font { position: 'absolute', bottom: '0px' }
 </style>
 <body>
 <script>
-	//////////////////////////////////////////////////////////////////////////////////
-	//		vars
-	//////////////////////////////////////////////////////////////////////////////////
-	var marginTop = 50;
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
 	//////////////////////////////////////////////////////////////////////////////////
@@ -28,7 +27,7 @@
 	});
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	renderer.domElement.style.position = 'absolute';
-	renderer.domElement.style.top = marginTop+'px';
+	renderer.domElement.style.top = '0px';
 	renderer.domElement.style.left = '0px';
 	document.body.appendChild(renderer.domElement);
 	// array of functions for the rendering loop
@@ -66,7 +65,6 @@
 		}
 	}
 	var video = arToolkitSource.domElement;
-	video.style.marginTop = marginTop+'px';
 	////////////////////////////////////////////////////////////////////////////////
 	//		  initialize arToolkitContext
 	////////////////////////////////////////////////////////////////////////////////
@@ -132,40 +130,6 @@
 	canvas.style.marginLeft = '25px';
 	canvas.height = 100;
 	canvas.width = 100;
-	//////////////////////////////////////////////////////////////////////////////////
-	//		toScreenXY
-	//////////////////////////////////////////////////////////////////////////////////
-	function toScreenXY(vector, camera, video) {
-		var output = vector.clone();
-		output.project(camera);
-		output.x = Math.round((output.x + 1)*video.videoWidth/2);
-		output.y = Math.round((-output.y + 1)*video.videoHeight/2);
-		output.z = 0;
-		return output;
-	}
-	//////////////////////////////////////////////////////////////////////////////////
-	//		change the light color
-	//////////////////////////////////////////////////////////////////////////////////
-	onRenderFcts.push(function(){
-		var ctx = canvas.getContext('2d');
-		var tempvector = creeperObj.creeper.position.clone();
-		tempvector.x -= 0.1;
-		var vector = toScreenXY(tempvector, camera, video);
-		ctx.drawImage(video, vector.x, vector.y, 100, 100,0,0,100,100);
-		var imgData = ctx.getImageData(0, 0, 1, 1);
-		var dfaultRGB = [84, 130, 53]
-		var dfaultLAB = RGB2Lab(dfaultRGB);
-		
-		var dtectedRGB = [imgData.data[0], imgData.data[1], imgData.data[2]];
-		var dtectedLAB = RGB2Lab(dtectedRGB);
-		var amp_factor = 1.2;
-		var lightLAB = [dtectedLAB[0]-30, (dtectedLAB[1]-dfaultLAB[1])*amp_factor, (dtectedLAB[2]-dfaultLAB[2])*amp_factor]
-		var lightRGB = Lab2RGB(lightLAB);
-		pointLight.color = new THREE.Color("rgb("+lightRGB[0]+", "+lightRGB[1]+", "+lightRGB[2]+")");
-		
-		document.getElementById('info1').innerText = "dfaultLAB("+dfaultLAB[0].toFixed(0)+", "+dfaultLAB[1].toFixed(0)+", "+dfaultLAB[2].toFixed(0)+")";
-		document.getElementById('info2').innerText = "dtectedLAB("+dtectedLAB[0].toFixed(0)+", "+dtectedLAB[1].toFixed(0)+", "+dtectedLAB[2].toFixed(0)+")";
-		document.getElementById('info3').innerText = "lightLAB("+lightLAB[0].toFixed(0)+", "+lightLAB[1].toFixed(0)+", "+lightLAB[2].toFixed(0)+")";
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
