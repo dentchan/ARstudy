@@ -127,9 +127,9 @@
 		var imgData = ctx.getImageData(0, 0, board.width, board.height);
 		for(i = 0; i < imgData.length; i+=4){
 			var avg = (imgData[i]+imgData[i+1]+imgData[i+2])/3
-			imgData[i] = avg;
-			imgData[i+1] = avg;
-			imgData[i+2] = avg;
+			imgData[i] = 255;
+			imgData[i+1] = 255;
+			imgData[i+2] = 255;
 		}
 		octx.putImageData(imgData, 0, 0);
 	})
