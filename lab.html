@@ -11,43 +11,31 @@
 <script src="creeper.js"></script>
 <script src="script.js"></script>
 <script src="color.js"></script>
-<style>
-	body { margin-top: '888px' }
-</style>
 <body>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
 	//////////////////////////////////////////////////////////////////////////////////
-	// init renderer
 	var renderer = new THREE.WebGLRenderer({
 		antialias: true,
-		alpha: true
+		alpha: true,
+		preserveDrawingBuffer: true
 	});
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	renderer.domElement.style.position = 'absolute';
 	renderer.domElement.style.top = '0px';
 	renderer.domElement.style.left = '0px';
-	document.body.appendChild(renderer.domElement);
+//	document.body.appendChild(renderer.domElement);
 	// array of functions for the rendering loop
 	var onRenderFcts= [];
-	// init scene and camera
 	var scene	= new THREE.Scene();
-	// Create a camera
 	var camera = new THREE.Camera();
 	scene.add(camera);
 	////////////////////////////////////////////////////////////////////////////////
 	//		  handle arToolkitSource
 	////////////////////////////////////////////////////////////////////////////////
 	var arToolkitSource = new THREEx.ArToolkitSource({
-		// to read from the webcam
 		sourceType : 'webcam',
-		// to read from an image
-		// sourceType : 'image',
-		// sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg',
-		// to read from a video
-		// sourceType : 'video',
-		// sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',
 	})
 	arToolkitSource.init(function onReady(){
 		onResize()
@@ -104,31 +92,49 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	creeperObj = new Creeper();
 	creeperObj.creeper.scale.set(0.1,0.1,0.1);
-	scene.add(creeperObj.creeper)
+	scene.add(creeperObj.creeper);
 	// 設置環境光提供輔助柔和白光
 	ambientLight = new THREE.AmbientLight(0xffffff)
-	scene.add(ambientLight)
+	scene.add(ambientLight);
 	//建立點光源(顏色:整數，強度:浮點，距離:整數，衰減:浮點)
-	pointLight = new THREE.PointLight(0xffffff, 10, 100, 2) 
-	pointLight.position.set(0, 40, 10)
-	pointLight.castShadow = true // 投影
-	scene.add(pointLight)
-	//////////////////////////////////////////////////////////////////////////////////
-	//		render the whole thing on the page
-	//////////////////////////////////////////////////////////////////////////////////
-	onRenderFcts.push(function(){
-		renderer.render( scene, camera );
-	})
+	pointLight = new THREE.PointLight(0xffffff, 10, 100, 2);
+	pointLight.position.set(0, 40, 10);
+	pointLight.castShadow = true; // 投影
+	scene.add(pointLight);
 	//////////////////////////////////////////////////////////////////////////////////
 	//		add subscreen
 	//////////////////////////////////////////////////////////////////////////////////
-	var canvas = document.createElement('canvas');
-	document.body.appendChild(canvas);
-	canvas.style.position = 'absolute';
-	canvas.style.marginTop = '150px';
-	canvas.style.marginLeft = '0px';
-	canvas.height = 100;
-	canvas.width = 100;
+	var output = document.createElement('canvas');
+	output.height = window.innerHeight;
+	output.width = window.innerWidth;
+	output.style.position = 'absolute';
+	output.style.Top = '0px';
+	output.style.Left = '0px';
+	document.body.appendChild(output);
+	var board = document.createElement('canvas');
+	board.height = window.innerHeight;
+	board.width = window.innerWidth;
+	//////////////////////////////////////////////////////////////////////////////////
+	//		render the whole thing on the page
+	//////////////////////////////////////////////////////////////////////////////////
+	var ctx = board.getContext("2d");
+	var octx = output.getContext("2d");
+	onRenderFcts.push(function(){
+		renderer.render( scene, camera );
+		var img = new Image;
+		img.src = renderer.domElement.toDataURL("image/jpeg");
+		var ctx = board.getContext('2d');
+		ctx.drawImage(img, 0, 0);
+		var imageData = ctx.getImageData(0, 0, board.width, board.height);
+  		var data = imageData.data;
+		for (var i = 0; i < data.length; i += 4) {
+			var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+			data[i]     = avg; // red
+			data[i + 1] = avg; // green
+			data[i + 2] = avg; // blue
+		}
+		octx.putImageData(imageData, 0, 0);
+	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
 	//////////////////////////////////////////////////////////////////////////////////
@@ -137,9 +143,9 @@
 		// keep looping
 		requestAnimationFrame( animate );
 		// measure time
-		lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
-		var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
-		lastTimeMsec	= nowMsec
+		lastTimeMsec = lastTimeMsec || nowMsec-1000/60
+		var deltaMsec = Math.min(200, nowMsec - lastTimeMsec)
+		lastTimeMsec = nowMsec
 		// call each update function
 		onRenderFcts.forEach(function(onRenderFct){
 			onRenderFct(deltaMsec/1000, nowMsec/1000)
