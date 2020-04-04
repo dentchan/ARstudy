@@ -126,7 +126,7 @@
 		ctx.drawImage(renderer.domElement, 0, 0);
 		var imgData = ctx.getImageData(0, 0, board.width, board.height);
 		for(i = 0; i < imgData.data.length; i+=4){
-			var avg = (imgData[i]+imgData[i+1]+imgData[i+2])/3
+			var avg = (imgData.data[i]+imgData.data[i+1]+imgData.data[i+2])/3
 			imgData.data[i] = avg;
 			imgData.data[i+1] = avg;
 			imgData.data[i+2] = avg;
