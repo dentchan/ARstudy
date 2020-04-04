@@ -25,7 +25,7 @@
 	renderer.domElement.style.position = 'absolute';
 	renderer.domElement.style.top = '0px';
 	renderer.domElement.style.left = '0px';
-	document.body.appendChild(renderer.domElement);
+//	document.body.appendChild(renderer.domElement);
 	// array of functions for the rendering loop
 	var onRenderFcts= [];
 	var scene	= new THREE.Scene();
@@ -122,21 +122,20 @@
 	onRenderFcts.push(function(){
 		octx.clearRect(0, 0, output.width, output.height);
 		renderer.render( scene, camera );
-		if(scene.visible){
-			var img = new Image;
-			img.src = renderer.domElement.toDataURL("image/jpeg");
-			var ctx = board.getContext('2d');
-			ctx.drawImage(img, 0, 0);
-			var imageData = ctx.getImageData(0, 0, board.width, board.height);
-			var data = imageData.data;
-			for (var i = 0; i < data.length; i += 4) {
-				var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-				data[i]     = avg; // red
-				data[i + 1] = avg; // green
-				data[i + 2] = avg; // blue
-			}
-			octx.putImageData(imageData, 0, 0);
+		var img = new Image;
+		img.src = renderer.domElement.toDataURL("image/jpeg");
+		var ctx = board.getContext('2d');
+		ctx.drawImage(img, 0, 0);
+		var imageData = ctx.getImageData(0, 0, board.width, board.height);
+		var data = imageData.data;
+		for (var i = 0; i < data.length; i += 4) {
+			var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+			data[i]     = avg; // red
+			data[i + 1] = avg; // green
+			data[i + 2] = avg; // blue
+			if(!scene.visible) data[i+3] = 0;
 		}
+		octx.putImageData(imageData, 0, 0);
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
