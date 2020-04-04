@@ -128,13 +128,13 @@
 		ctx.drawImage(img, 0, 0);
 		var imageData = ctx.getImageData(0, 0, board.width, board.height);
 		var data = imageData.data;
-		for (var i = 0; i < data.length; i += 4) {
+		/*for (var i = 0; i < data.length; i += 4) {
 			var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
 			data[i]     = avg; // red
 			data[i + 1] = avg; // green
 			data[i + 2] = avg; // blue
 			if(!scene.visible) data[i+3] = 0;
-		}
+		}*/
 		octx.putImageData(imageData, 0, 0);
 	})
 	//////////////////////////////////////////////////////////////////////////////////
