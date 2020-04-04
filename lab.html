@@ -121,6 +121,7 @@
 	var octx = output.getContext("2d");
 	onRenderFcts.push(function(){
 		octx.clearRect(0, 0, output.width, output.height);
+		ctx.clearRect(0, 0, board.width, board.height);
 		renderer.render( scene, camera );
 		ctx.drawImage(renderer.domElement, 0, 0);
 		var imgData = ctx.getImageData(0, 0, board.width, board.height);
