@@ -125,13 +125,13 @@
 		renderer.render( scene, camera );
 		ctx.drawImage(renderer.domElement, 0, 0);
 		var imgData = ctx.getImageData(0, 0, board.width, board.height);
-		for(i = 0; i < imgData.length; i+=4){
+		for(i = 0; i < imgData.data.length; i+=4){
 			var avg = (imgData[i]+imgData[i+1]+imgData[i+2])/3
-			imgData[i] = 255;
-			imgData[i+1] = 255;
-			imgData[i+2] = 255;
+			imgData.data[i] = avg;
+			imgData.data[i+1] = avg;
+			imgData.data[i+2] = avg;
 		}
-		//octx.putImageData(imgData, 0, 0);
+		octx.putImageData(imgData, 0, 0);
 	})
 	//////////////////////////////////////////////////////////////////////////////////
 	//		randering loop
